@@ -30,6 +30,7 @@ results = cursor.fetchall()
 #-----------Update current login time-------------
 
 cursor.execute("UPDATE Student SET current_login_time = ? WHERE Student_id = ?;",(logintime, current_student_id))
+db_connection.commit()
 
 #-------------------------------------------------
 
@@ -90,5 +91,6 @@ results = cursor.fetchall()
 #-----------Insert log records-------------------
 
 cursor.execute("INSERT INTO Log VALUES (?,?,?);",(current_student_id, logintime, datetime.now()))
+db_connection.commit()
 
 #----------------------------------------------
