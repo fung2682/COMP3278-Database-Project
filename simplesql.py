@@ -42,7 +42,7 @@ results = cursor.fetchall()
 
 #-----------get LogInfo-------------------
 
-cursor.execute("SELECT * FROM Log WHERE Log.student_id = current_student_id ORDER BY login_time DESC;")
+cursor.execute("SELECT * FROM Log WHERE Log.student_id = ? ORDER BY login_time DESC;", (current_student_id))
 results = cursor.fetchall()
 
 #-------------------------------------------
