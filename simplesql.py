@@ -77,9 +77,8 @@ results = cursor.fetchall()
 
 #-----------get lecture notes-------------------
 
-cursor.execute("""WITH lectures AS (SELECT * FROM (SELECT course_id FROM Study WHERE student_id = ?) AS courseids, Lecture L WHERE courseids.course_id = L.course_id)
-SELECT LN.course_id, LN.class_id, LN.note_link
-FROM lectures L, Lecture_note LN
+cursor.execute("""SELECT LN.course_id, LN.class_id, LN.note_link
+FROM Lecture_note LN, (SELECT * FROM (SELECT course_id FROM Study WHERE student_id = ?) AS courseids, Lecture L WHERE courseids.course_id = L.course_id) AS L
 WHERE L.course_id = LN.course_id
 AND L.class_id = LN.class_id;""", (current_student_id))
 results = cursor.fetchall()
@@ -88,9 +87,8 @@ results = cursor.fetchall()
 
 #-----------get tutorial notes-------------------
 
-cursor.execute("""WITH tutorials AS (SELECT * FROM (SELECT course_id FROM Study WHERE student_id = ?) AS courseids, Tutorial T WHERE courseids.course_id = T.course_id)
-SELECT TN.course_id, TN.class_id, TN.note_link
-FROM tutorials T, Tutorial_note TN
+cursor.execute("""SELECT TN.course_id, TN.class_id, TN.note_link
+FROM Tutorial_note TN,(SELECT * FROM (SELECT course_id FROM Study WHERE student_id = ?) AS courseids, Tutorial T WHERE courseids.course_id = T.course_id) AS T
 WHERE T.course_id = TN.course_id
 AND T.class_id = TN.class_id;""", (current_student_id))
 results = cursor.fetchall()
