@@ -119,7 +119,7 @@ CREATE TABLE `Lecture` (
   FOREIGN KEY(course_id) REFERENCES Course(course_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO Lecture (class_id, course_id, `date`, `starttime`, `endtime`, room, zoom_link)
+INSERT INTO Lecture (course_id, class_id, `date`, `starttime`, `endtime`, room, zoom_link)
 VALUES ("COMP3278_1A", "1",'22/11/2022', '13:30', '15:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
 ("COMP3278_1A", "2", '29/11/2022', '13:30', '15:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
 ("COMP3230_1A", "1", '21/11/2022', '10:30', '12:30', "CYCP-2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
@@ -141,7 +141,7 @@ CREATE TABLE `Tutorial` (
   FOREIGN KEY(course_id) REFERENCES Course(course_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO Tutorial (class_id, course_id, `date`, `starttime`, `endtime`, room, zoom_link)
+INSERT INTO Tutorial (course_id, class_id, `date`, `starttime`, `endtime`, room, zoom_link)
 VALUES ("COMP3278_1A", "1", '24/11/2022', '14:30', '15:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09");
 
 DROP TABLE IF EXISTS `Lecture_Note`;
@@ -156,7 +156,7 @@ CREATE TABLE `Lecture_Note` (
   FOREIGN KEY(course_id) REFERENCES Course(course_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO Lecture (class_id, course_id, note_link)
+INSERT INTO Lecture (course_id, class_id, note_link)
 VALUES ("COMP3278_1A", "1", "https://moodle.hku.hk/mod/resource/view.php?id=2665229"),
 ("COMP3278_1A", "2", "https://moodle.hku.hk/mod/resource/view.php?id=2694930"),
 ("COMP3230_1A", "1", "https://moodle.hku.hk/mod/resource/view.php?id=2639596"),
@@ -174,7 +174,7 @@ CREATE TABLE `Tutorial_Note` (
   FOREIGN KEY(course_id) REFERENCES Course(course_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO Tutorial (class_id, course_id, note_link)
+INSERT INTO Tutorial (course_id, course_id, note_link)
 VALUES ("COMP3278_1A", "1", "https://moodle.hku.hk/mod/resource/view.php?id=2668112");
 
 -- # Create TABLE 'Course'
