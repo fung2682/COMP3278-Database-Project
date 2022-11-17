@@ -12,58 +12,58 @@ last_log = 1
 #-------get timetable data----------------
 
 def getClasses(weekNo):
-    #get lectures
-    cursor.execute("""SELECT L.course_id,L.starttime,L.endtime,L.room, WEEKDAY(L.date) FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Lecture L 
-    WHERE courseids.course_id = L.course_id
-    AND WEEK(L.date) = WEEK(NOW())+?;""", (current_student_id,weekNo))
-    class1 = cursor.fetchall()
-    # get tutorials
-    cursor.execute("""SELECT T.course_id, T.starttime, T.endtime, T.room, WEEKDAY(T.date) FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Tutorial T 
-    WHERE courseids.course_id = T.course_id
-    AND WEEK(T.date) = WEEK(NOW())+?;""", (current_student_id,weekNo))
-    class2 = cursor.fetchall()
-    
-    for i in class1:
-        i = (*i,True)
-    for j in class2:
-        j = (*j,False)
-        class1.append(j)
-    return class1
+	    #get lectures
+	    cursor.execute("""SELECT L.course_id,L.starttime,L.endtime,L.room, WEEKDAY(L.date) FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Lecture L 
+	    WHERE courseids.course_id = L.course_id
+	    AND WEEK(L.date) = WEEK(NOW())+?;""", (current_student_id,weekNo))
+	    class1 = cursor.fetchall()
+	    # get tutorials
+	    cursor.execute("""SELECT T.course_id, T.starttime, T.endtime, T.room, WEEKDAY(T.date) FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Tutorial T 
+	    WHERE courseids.course_id = T.course_id
+	    AND WEEK(T.date,0) = WEEK(NOW(),0)+?;""", (current_student_id,weekNo))
+	    class2 = cursor.fetchall()
+
+	    for i in class1:
+		i = (*i,True)
+	    for j in class2:
+		j = (*j,False)
+		class1.append(j)
+	    return class1
 
 #-----------------------------------------
 
 #--------check for classes in a hour-------
 
 def checkclass():
-    cursor.execute("""SELECT L.course_id, L.class_id, L.date, L.starttime, L.endtime, L.room, L.zoom_link FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Lecture L WHERE courseids.course_id = L.course_id
-    AND L.date = CURRENT_DATE
-    AND TIMEDIFF(CURRENT_TIME, L.starttime) >= '00:00'
+    	cursor.execute("""SELECT L.course_id, L.class_id, L.date, L.starttime, L.endtime, L.room, L.zoom_link FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Lecture L WHERE courseids.course_id = L.course_id
+	AND L.date = CURRENT_DATE
+	AND TIMEDIFF(CURRENT_TIME, L.starttime) >= '00:00'
 	AND TIMEDIFF(CURRENT_TIME, L.starttime) <= '59:59';""",(current_student_id))
-    ret = cursor.fetchall()
-    if not ret:
-	cursor.execute("""SELECT T.course_id, T.class_id, T.date, T.starttime, T.endtime, T.room, T.zoom_link FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Tutorial T WHERE courseids.course_id = T.course_id
-    	AND T.date = CURRENT_DATE
-    	AND TIMEDIFF(CURRENT_TIME, T.starttime) >= '00:00'
-	AND TIMEDIFF(CURRENT_TIME, T.starttime) <= '59:59';""",(current_student_id))
     	ret = cursor.fetchall()
-	if not ret:
-		return NULL
-	courseid = ret[0][0]
-    	cursor.execute("""news_announcement FROM news_announcement WHERE course_id = "?";""", (courseid))
-    	ret2 = cursor.fetchall()
-    	classid = ret[0][1]
-    	cursor.execute("""SELECT note_link FROM Tutorial_Note WHERE course_id = "?" AND class_id = "?";""", (courseid, classid))
-    	ret3 = cursor.fetchall()
-    	ret[0] = (*ret[0],ret2,ret3,True)
-    else:
-    	courseid = ret[0][0]
-    	cursor.execute("""news_announcement FROM news_announcement WHERE course_id = "?";""", (courseid))
-    	ret2 = cursor.fetchall()
-    	classid = ret[0][1]
-    	cursor.execute("""SELECT note_link FROM Lecture_Note WHERE course_id = "?" AND class_id = "?";""", (courseid, classid))
-    	ret3 = cursor.fetchall()
-    	ret[0] = (*ret[0],ret2,ret3,False)
-    return ret
+    	if not ret:
+		cursor.execute("""SELECT T.course_id, T.class_id, T.date, T.starttime, T.endtime, T.room, T.zoom_link FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Tutorial T WHERE courseids.course_id = T.course_id
+		AND T.date = CURRENT_DATE
+		AND TIMEDIFF(CURRENT_TIME, T.starttime) >= '00:00'
+		AND TIMEDIFF(CURRENT_TIME, T.starttime) <= '59:59';""",(current_student_id))
+		ret = cursor.fetchall()
+		if not ret:
+			return NULL
+		courseid = ret[0][0]
+		cursor.execute("""news_announcement FROM news_announcement WHERE course_id = "?";""", (courseid))
+		ret2 = cursor.fetchall()
+		classid = ret[0][1]
+		cursor.execute("""SELECT note_link FROM Tutorial_Note WHERE course_id = "?" AND class_id = "?";""", (courseid, classid))
+		ret3 = cursor.fetchall()
+		ret[0] = (*ret[0],ret2,ret3,True)
+    	else:
+		courseid = ret[0][0]
+		cursor.execute("""news_announcement FROM news_announcement WHERE course_id = "?";""", (courseid))
+		ret2 = cursor.fetchall()
+		classid = ret[0][1]
+		cursor.execute("""SELECT note_link FROM Lecture_Note WHERE course_id = "?" AND class_id = "?";""", (courseid, classid))
+		ret3 = cursor.fetchall()
+		ret[0] = (*ret[0],ret2,ret3,False)
+    	return ret
 #----------------------------------------
 
 #-------------connect mysql-----------------
