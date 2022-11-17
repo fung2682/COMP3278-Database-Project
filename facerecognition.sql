@@ -108,8 +108,8 @@ DROP TABLE IF EXISTS `Lecture`;
 
 -- Create TABLE 'Lecture'
 CREATE TABLE `Lecture` (
-  `class_id` varchar(3) NOT NULL,
   `course_id` varchar(12) NOT NULL,
+  `class_id` varchar(3) NOT NULL,
   `date` date NOT NULL,
   `starttime` time NOT NULL,
   `endtime` time NOT NULL,
@@ -130,10 +130,11 @@ DROP TABLE IF EXISTS `Tutorial`;
 
 -- Create TABLE 'Tutorial'
 CREATE TABLE `Tutorial` (
+  `course_id` varchar(12) NOT NULL,
   `class_id` varchar(3) NOT NULL,
-  `course_id` varchar(8) NOT NULL,
   `date` date NOT NULL,
-  `time` time NOT NULL,
+  `starttime` time NOT NULL,
+  `endtime` time NOT NULL,
   `room` varchar(10),
   `zoom_link` varchar(100),
   PRIMARY KEY(class_id, course_id),
@@ -147,8 +148,8 @@ DROP TABLE IF EXISTS `Lecture_Note`;
 
 -- Create TABLE 'Lecture_Note'
 CREATE TABLE `Lecture_Note` (
+  `course_id` varchar(12) NOT NULL,
   `class_id` varchar(3) NOT NULL,
-  `course_id` varchar(8) NOT NULL,
   `note_link` varchar(100),
   PRIMARY KEY(class_id, course_id, note_link),
   FOREIGN KEY(class_id) REFERENCES Lecture(class_id),
@@ -165,8 +166,8 @@ DROP TABLE IF EXISTS `Tutorial_Note`;
 
 -- Create TABLE 'Tutorial_Note'
 CREATE TABLE `Tutorial_Note` (
+  `course_id` varchar(12) NOT NULL,
   `class_id` varchar(3) NOT NULL,
-  `course_id` varchar(8) NOT NULL,
   `note_link` varchar(100),
   PRIMARY KEY(class_id, course_id, note_link),
   FOREIGN KEY(class_id) REFERENCES Tutorial(class_id),
