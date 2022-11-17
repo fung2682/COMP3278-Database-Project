@@ -10,7 +10,7 @@ last_log = 1
 
 
 #-------get timetable data----------------
-
+#index: 0: course_id, 1: starttime, 2: endtime, 3:room, 4: weekday, 5:islecture
 def getClasses(weekNo):
 	    #get lectures
 	    cursor.execute("""SELECT L.course_id,L.starttime,L.endtime,L.room, WEEKDAY(L.date) FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Lecture L 
@@ -33,7 +33,7 @@ def getClasses(weekNo):
 #-----------------------------------------
 
 #--------check for classes in a hour-------
-
+#index:0: course_id, 1: class_id, 2: date, 3: starttime, 4: endtime, 5: room, 6: zoom_link, 7: news_announcement(list), 8. note_link (list), 9: islecture
 def checkclass():
     	cursor.execute("""SELECT L.course_id, L.class_id, L.date, L.starttime, L.endtime, L.room, L.zoom_link FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Lecture L WHERE courseids.course_id = L.course_id
 	AND L.date = CURRENT_DATE
