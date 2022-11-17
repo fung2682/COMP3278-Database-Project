@@ -168,6 +168,13 @@ class Ui_Form(object):
         self.checkBox_2.setMouseTracking(True)
         self.checkBox_2.setChecked(True)
 
+        self.pushButton = QtWidgets.QPushButton(Form)
+        self.pushButton.setGeometry(QtCore.QRect(540, 80, 161, 25))
+        self.pushButton.setObjectName("pushButton")
+        self.pushButton_2 = QtWidgets.QPushButton(Form)
+        self.pushButton_2.setGeometry(QtCore.QRect(380, 80, 161, 25))
+        self.pushButton_2.setObjectName("pushButton_2")
+
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -200,3 +207,6 @@ class Ui_Form(object):
 
         self.checkBox.setText(_translate("Form", "Show tutorials"))
         self.checkBox_2.setText(_translate("Form", "Show lectures"))
+
+        self.pushButton.setText(_translate("Form", "Show Next Week"))
+        self.pushButton_2.setText(_translate("Form", "Show Previous Week"))
