@@ -24,22 +24,7 @@ SET time_zone = "+00:00";
 
 --
 -- Table structure for table `Student`
---
--- DROP TABLE IF EXISTS `Student`;
 
--- # Create TABLE 'Student'
--- CREATE TABLE `Student` (
---   `student_id` int NOT NULL,
---   `name` varchar(50) NOT NULL,
---   `login_time` time NOT NULL,
---   `login_date` date NOT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- LOCK TABLES `Student` WRITE;
--- /*!40000 ALTER TABLE `Student` DISABLE KEYS */;
--- INSERT INTO `Student` VALUES (1, "JACK", NOW(), '2021-01-20');
--- /*!40000 ALTER TABLE `Student` ENABLE KEYS */;
--- UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `Student`;
 
