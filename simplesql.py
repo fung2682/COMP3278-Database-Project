@@ -54,7 +54,7 @@ def checkclass():
     	classid = ret[0][1]
     	cursor.execute("""SELECT note_link FROM Tutorial_Note WHERE course_id = "?" AND class_id = "?";""", (courseid, classid))
     	ret3 = cursor.fetchall()
-    	ret[0] = (*ret[0],ret2,ret3)
+    	ret[0] = (*ret[0],ret2,ret3,True)
     else:
     	courseid = ret[0][0]
     	cursor.execute("""news_announcement FROM news_announcement WHERE course_id = "?";""", (courseid))
@@ -62,7 +62,7 @@ def checkclass():
     	classid = ret[0][1]
     	cursor.execute("""SELECT note_link FROM Lecture_Note WHERE course_id = "?" AND class_id = "?";""", (courseid, classid))
     	ret3 = cursor.fetchall()
-    	ret[0] = (*ret[0],ret2,ret3)
+    	ret[0] = (*ret[0],ret2,ret3,False)
     return ret
 #----------------------------------------
 
