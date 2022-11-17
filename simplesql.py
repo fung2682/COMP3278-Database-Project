@@ -6,6 +6,7 @@ from datetime import datetime
 #get student id -> current_student_id
 current_student_id = "123123"
 logintime = datetime.now()
+last_log = 1
 
 #-------------connect mysql-----------------
 
@@ -96,7 +97,7 @@ results = cursor.fetchall()
 
 #-----------Insert log records-------------------
 
-cursor.execute("INSERT INTO Log VALUES (?,?,?);",(current_student_id, logintime, datetime.now()))
+cursor.execute("INSERT INTO Log VALUES (?,?,?,?);",(last_log,current_student_id, logintime, datetime.now()))
 db_connection.commit()
 
 #----------------------------------------------
