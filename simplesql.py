@@ -50,8 +50,7 @@ results = cursor.fetchall()
 
 #-----------get course announcements-------------------
 
-cursor.execute("""WITH courseids AS (SELECT course_id AS courseids FROM Study WHERE student_id = ?)
-SELECT * FROM News_announcement NA, courseids WHERE NA.course_id = courseids.course_id;""", (current_student_id))
+cursor.execute("""SELECT NA.course_id, NA.news_announcement FROM news_announcement NA, (SELECT course_id FROM Study WHERE student_id = ?) AS courseids WHERE NA.course_id = courseids.course_id;""", (current_student_id))
 results = cursor.fetchall()
 
 #-------------------------------------------
