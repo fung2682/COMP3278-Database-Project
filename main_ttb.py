@@ -126,7 +126,6 @@ class MainWindow (QMainWindow, Ui_Form):
 
     def toddle_tutorials(self):
         checked = self.checkBox.isChecked()
-        self.gridLayout.itemAtPosition(1, 2).widget().setStyleSheet("opacity: 0; background-color: #64E986")
         for item in query:
             if (item[4] == 0):
                 row_num = int(item[1][0:2]) - 8 + 1
