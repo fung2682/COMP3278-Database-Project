@@ -61,7 +61,7 @@ cursor.execute("""SELECT * FROM (SELECT course_id FROM Study WHERE student_id = 
 results = cursor.fetchall()
 #-----------------------------------
 
-#-----------get tutorial notes-------------------
+#-----------get Tutorials-------------------
 cursor.execute("""SELECT * FROM (SELECT course_id FROM Study WHERE student_id = ?) AS courseids, Tutorial T WHERE courseids.course_id = T.course_id;""", (current_student_id))
 results = cursor.fetchall()
 
