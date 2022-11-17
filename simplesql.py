@@ -41,16 +41,30 @@ def checkclass():
 	AND TIMEDIFF(CURRENT_TIME, L.starttime) <= '59:59';""",(current_student_id))
     ret = cursor.fetchall()
     if not ret:
-        return NULL
-    courseid = ret[0][0]
-    cursor.execute("""news_announcement FROM news_announcement WHERE course_id = "?";""", (courseid))
-    ret2 = cursor.fetchall()
-    classid = ret[0][1]
-    cursor.execute("""SELECT note_link FROM Lecture_Note WHERE course_id = "?" AND class_id = "?";""", (courseid, classid))
-    ret3 = cursor.fetchall()
-    ret[0] = (*ret[0],ret2,ret3)
+	cursor.execute("""SELECT T.course_id, T.class_id, T.date, T.starttime, T.endtime, T.room, T.zoom_link FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Tutorial T WHERE courseids.course_id = T.course_id
+    	AND T.date = CURRENT_DATE
+    	AND TIMEDIFF(CURRENT_TIME, T.starttime) >= '00:00'
+	AND TIMEDIFF(CURRENT_TIME, T.starttime) <= '59:59';""",(current_student_id))
+    	ret = cursor.fetchall()
+	if not ret:
+		return NULL
+	courseid = ret[0][0]
+    	cursor.execute("""news_announcement FROM news_announcement WHERE course_id = "?";""", (courseid))
+    	ret2 = cursor.fetchall()
+    	classid = ret[0][1]
+    	cursor.execute("""SELECT note_link FROM Tutorial_Note WHERE course_id = "?" AND class_id = "?";""", (courseid, classid))
+    	ret3 = cursor.fetchall()
+    	ret[0] = (*ret[0],ret2,ret3)
+    else:
+    	courseid = ret[0][0]
+    	cursor.execute("""news_announcement FROM news_announcement WHERE course_id = "?";""", (courseid))
+    	ret2 = cursor.fetchall()
+    	classid = ret[0][1]
+    	cursor.execute("""SELECT note_link FROM Lecture_Note WHERE course_id = "?" AND class_id = "?";""", (courseid, classid))
+    	ret3 = cursor.fetchall()
+    	ret[0] = (*ret[0],ret2,ret3)
     return ret
-
+#----------------------------------------
 
 #-------------connect mysql-----------------
 
