@@ -45,7 +45,7 @@ DROP TABLE IF EXISTS `Student`;
 
 -- Create TABLE 'Student'
 CREATE TABLE `Student` (
-  `student_id` int NOT NULL,
+  `student_id` varchar(10) NOT NULL,
   `name` varchar(50) NOT NULL,
   `current_login_time` datetime NOT NULL,
   `email_address` varchar(50) NOT NULL,
@@ -53,35 +53,52 @@ CREATE TABLE `Student` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- sample value
-insert into Student (student_id, name, current_login_time, email_address)
-values (0001, "Peter", NOW() , "peter1234@connect.hku.hk");
+INSERT INTO Student (student_id, name, current_login_time, email_address)
+VALUES ("0001", "Jeff", NOW() , "comp3278grp19@gmail.com");
 
 DROP TABLE IF EXISTS `Course`;
 
 -- Create TABLE 'Course'
 CREATE TABLE `Course` (
-  `course_id` varchar(8) NOT NULL,
+  `course_id` varchar(12) NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` varchar(1000) NOT NULL,
   PRIMARY KEY(course_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+-- sample value
+INSERT INTO Course (course_id, name, description)
+VALUES ("COMP3278_1A", "Introduction to database management systems", "This course studies the principles, design, administration, and implementation of database management systems. Topics include: entity-relationship model, relational model, relational algebra, database design and normalization, database query languages, indexing schemes, integrity and concurrency control."),
+("COMP3230_1A", "Principles of operating systems","Operating system structures, process and thread, CPU scheduling, process synchronization, deadlocks, memory management, file systems, I/O systems and device driver, mass-storage structure and disk scheduling, case studies.");
+
+
 DROP TABLE IF EXISTS `news_announcement`;
 
 -- Create TABLE 'news_announcement'
 CREATE TABLE `news_announcement` (
-  `course_id` varchar(8) NOT NULL,
+  `course_id` varchar(12) NOT NULL,
   `news_announcement` varchar(1000) NOT NULL,
   PRIMARY KEY(course_id, news_announcement),
   FOREIGN KEY(course_id) REFERENCES Course(course_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO news_announcement (course_id, news_announcement)
+VALUES ("COMP3278_1A","Dear students, We will resume face-to-face teaching tomorrow."),
+("COMP3230_1A","Hi all,
+
+The attached file is the summary of the mid-term exam. If you have any questions, please feel free to contact me.
+
+Best,
+
+Xie ZHANG");
+
 DROP TABLE IF EXISTS `Log`;
 
 -- Create TABLE 'Log'
 CREATE TABLE `Log` (
-  `log_id` int NOT NULL,
-  `student_id` int NOT NULL,
+  `log_id` varchar(10) NOT NULL,
+  `student_id` varchar(10) NOT NULL,
   `login_time` datetime NOT NULL,
   `logout_time` datetime NOT NULL,
   PRIMARY KEY(log_id),
@@ -92,19 +109,22 @@ DROP TABLE IF EXISTS `Study`;
 
 -- Create TABLE 'Study'
 CREATE TABLE `Study` (
-  `student_id` int NOT NULL,
-  `course_id` varchar(8) NOT NULL,
+  `student_id` varchar(10) NOT NULL,
+  `course_id` varchar(12) NOT NULL,
   PRIMARY KEY(student_id, course_id),
   FOREIGN KEY(student_id) REFERENCES Student(student_id),
   FOREIGN KEY(course_id) REFERENCES Course(course_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO Study (student_id, course_id)
+VALUES ("0001", "COMP3230_1A"), ("0001", "COMP3278_1A");
 
 DROP TABLE IF EXISTS `Lecture`;
 
 -- Create TABLE 'Lecture'
 CREATE TABLE `Lecture` (
   `class_id` varchar(3) NOT NULL,
-  `course_id` varchar(8) NOT NULL,
+  `course_id` varchar(12) NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
   `room` varchar(10),
@@ -112,6 +132,10 @@ CREATE TABLE `Lecture` (
   PRIMARY KEY(class_id, course_id),
   FOREIGN KEY(course_id) REFERENCES Course(course_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO Lecture (class_id, course_id, date, time, room, zoom_link)
+VALUES ("COMP3278_1A", "L1", TO_DATE('22/11/2022','DD/MM/YYYY'), , "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09")
+
 
 DROP TABLE IF EXISTS `Tutorial`;
 
