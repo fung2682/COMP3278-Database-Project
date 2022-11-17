@@ -15,12 +15,12 @@ def getClasses(weekNo):
     #get lectures
     cursor.execute("""SELECT L.course_id,L.starttime,L.endtime,L.room, WEEKDAY(L.date) FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Lecture L 
     WHERE courseids.course_id = L.course_id
-    AND WEEK(L.date) = WEEK(NOW())+?""", (current_student_id,weekNo))
+    AND WEEK(L.date) = WEEK(NOW())+?;""", (current_student_id,weekNo))
     class1 = cursor.fetchall()
     # get tutorials
     cursor.execute("""SELECT T.course_id, T.starttime, T.endtime, T.room, WEEKDAY(T.date) FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Tutorial T 
     WHERE courseids.course_id = T.course_id
-    AND WEEK(T.date) = WEEK(NOW())+?""", (current_student_id,weekNo))
+    AND WEEK(T.date) = WEEK(NOW())+?;""", (current_student_id,weekNo))
     class2 = cursor.fetchall()
     
     for i in class1:
@@ -35,7 +35,11 @@ def getClasses(weekNo):
 #--------check for classes in a hour-------
 
 def checkclass():
-    """SELECT * FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Lecture L WHERE courseids.course_id = L.course_id;"""
+    cursor.execute("""SELECT L.course_id, L.class_id, L.date, L.starttime, L.endtime, L.room, L.zoom_link FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Lecture L WHERE courseids.course_id = L.course_id
+    AND L.date = CURRENT_DATE
+    AND DATEDIFF(CURRENT_TIME, L.starttime) > 0
+    AND DATEDIFF(CURRENT_TIME, L.starttime) < 2;""",(current_student_id))
+    
 
 
 
