@@ -174,7 +174,7 @@ CREATE TABLE `Tutorial_Note` (
   FOREIGN KEY(course_id) REFERENCES Course(course_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO Tutorial (course_id, course_id, note_link)
+INSERT INTO Tutorial (course_id, class_id, note_link)
 VALUES ("COMP3278_1A", "1", "https://moodle.hku.hk/mod/resource/view.php?id=2668112");
 
 -- # Create TABLE 'Course'
