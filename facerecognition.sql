@@ -98,7 +98,7 @@ DROP TABLE IF EXISTS `Log`;
 
 -- Create TABLE 'Log'
 CREATE TABLE `Log` (
-  `log_id` varchar(10) NOT NULL,
+  `log_id` int NOT NULL,
   `student_id` varchar(10) NOT NULL,
   `login_time` datetime NOT NULL,
   `logout_time` datetime NOT NULL,
