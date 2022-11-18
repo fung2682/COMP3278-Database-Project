@@ -92,10 +92,19 @@ def addLog():
 #-------update log-----------------
 #UPDATE Student SET current_login_time = ? WHERE Student_id = ?;""",(logintime, current_student_id))
 def updateLog():
-	cursor.execute("UPDATE Log SET logout_time = ? WHERE AND log_id = ?;",(datetime.now(),currentlog))
+	cursor.execute("UPDATE Log SET logout_time = ? WHERE log_id = ?;",(datetime.now(),currentlog))
 	db_connection.commit()
 
 #---------------------------------
+
+#----------get log-------
+
+def getLog():
+	cursor.execute("""SELECT log_id, login_time, logout_time, TIMEDIFF(logout_time,login_time) FROM Log WHERE Log.student_id = ? ORDER BY login_time DESC LIMIT 10;""", (current_student_id))
+	results = cursor.fetchall()
+	return results
+
+#------------------------
 
 #-------------connect mysql-----------------
 
