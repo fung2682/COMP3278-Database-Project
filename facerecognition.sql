@@ -39,7 +39,9 @@ CREATE TABLE `Student` (
 
 -- sample value
 INSERT INTO Student (student_id, name, current_login_time, email_address)
-VALUES ("0001", "Jeff", NOW() , "comp3278grp19@gmail.com");
+VALUES ("0001", "JEFF", NOW() , "comp3278grp19@gmail.com");
+INSERT INTO Student (student_id, name, current_login_time, email_address)
+VALUES ("0001", "STEPHANIE", NOW() , "comp3278grp19@gmail.com");
 
 DROP TABLE IF EXISTS `Course`;
 
