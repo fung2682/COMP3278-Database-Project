@@ -32,16 +32,15 @@ DROP TABLE IF EXISTS `Student`;
 CREATE TABLE `Student` (
   `student_id` varchar(10) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `current_login_time` datetime NOT NULL,
   `email_address` varchar(50) NOT NULL,
   PRIMARY KEY(student_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- sample value
-INSERT INTO Student (student_id, name, current_login_time, email_address)
-VALUES ("0001", "JEFF", NOW() , "comp3278grp19@gmail.com");
-INSERT INTO Student (student_id, name, current_login_time, email_address)
-VALUES ("0002", "STEPHANIE", NOW() , "comp3278grp19@gmail.com");
+INSERT INTO Student (student_id, name, email_address)
+VALUES ("0001", "JEFF", "comp3278grp19@gmail.com");
+INSERT INTO Student (student_id, name, email_address)
+VALUES ("0002", "STEPHANIE", "comp3278grp19@gmail.com");
 
 DROP TABLE IF EXISTS `Course`;
 
