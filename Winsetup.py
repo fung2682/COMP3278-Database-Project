@@ -172,11 +172,11 @@ class Ui_Window(object):
         self.checkBox_2.setChecked(True)
 
         self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setGeometry(QtCore.QRect(90, 121, 161, 25))
+        self.pushButton.setGeometry(QtCore.QRect(255, 121, 161, 25))
         self.pushButton.setObjectName("pushButton")
         self.pushButton.setStyleSheet("background-color: #C5C2BA")
         self.pushButton_2 = QtWidgets.QPushButton(Form)
-        self.pushButton_2.setGeometry(QtCore.QRect(255, 121, 161, 25))
+        self.pushButton_2.setGeometry(QtCore.QRect(90, 121, 161, 25))
         self.pushButton_2.setObjectName("pushButton_2")
         self.pushButton_2.setStyleSheet("background-color: #C5C2BA")
 
@@ -224,7 +224,7 @@ class Ui_Window(object):
         self.log_title_4.setText("<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">duration</span></p></body></html>")
 
         self.list_widget = QListWidget(self)
-        self.list_widget.setGeometry(90, 150, 900, 600)
+        self.list_widget.setGeometry(90, 150, 900, 450)
         self.scroll_bar = QScrollBar(self)
         self.scroll_bar.setStyleSheet("background : #EAE9E5;")
         self.list_widget.setVerticalScrollBar(self.scroll_bar)
