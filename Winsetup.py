@@ -193,6 +193,11 @@ class Ui_Window(object):
         self.tottb.setGeometry(QtCore.QRect(1100, 123, 100, 25))
         self.tottb.setObjectName("tottb")
         self.tottb.setStyleSheet("background-color: #C5C2BA")
+        
+        self.logOut = QtWidgets.QPushButton(Form)
+        self.logOut.setGeometry(QtCore.QRect(1250, 20, 100, 25))
+        self.logOut.setObjectName("logOut")
+        self.logOut.setStyleSheet("background-color: #F3A393")
 
         self.welcomemsg = QtWidgets.QLabel(Form)
         self.welcomemsg.setGeometry(QtCore.QRect(90, 20, 1110, 95))
@@ -268,3 +273,4 @@ class Ui_Window(object):
 
         self.toLog.setText(_translate("Form", "View Log"))
         self.tottb.setText(_translate("Form", "View Timetable"))
+        self.logOut.setText(_translate("Form", "Log Out"))
