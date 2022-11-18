@@ -5,7 +5,7 @@ from PyQt5.QtCore import *
 from Winsetup import Ui_Window
 import sys
 from datetime import datetime, date, timedelta, time
-from queryfunc import getClasses, checkclass, addLog, updateLog, getLog
+from queryfunc import getClasses, checkclass, addLog, updateLog, getLog, getStudentInfo, getLastLog
 
 student_name = ''
 current_student_id = -1
@@ -16,46 +16,32 @@ welcome_msg = []
 def set_student_info(student):
     global student_name, current_student_id, useremail
     student_name = student
-    info = getStudentInfo(student_name)
+    student_name = "JEFF" ### TEMPORARY, TO BE REMOVED!
+    info = getStudentInfo(student_name)[0]
     current_student_id = info[0]
     useremail = info[1]
 
-def get_wel_msg():
+def get_wel_msg(logintime):
     global welcome_msg
-    welcome_msg = "qwertyui"
+    last_login = getLastLog(current_student_id)
+    welcome_msg = " Hello, " + str(student_name) + ". " + "The time now is " + str(logintime.strftime("%d/%m/%Y %H:%M:%S \n")) + " You last logged in at "
+    welcome_msg += str(last_login[0][0].strftime("%d/%m/%Y %H:%M:%S"))
+    welcome_msg += "\n                                                                                      I am always ready to learn, although I do not always like being taught.  - Winston Churchill"
 
 def get_ttb_info(aDate):
     global query
     query = getClasses(aDate, current_student_id)
-    # sample
-#     if (aDate == date.today() + timedelta(7)):
-#         # print("next week")
-#         query = [('COMP1323 - 1A', datetime.strptime('08::30::00', '%H::%M::%S').time(), datetime.strptime('09::30::00', '%H::%M::%S').time(), 'MWT2', 5, 1)]
-#     elif (aDate == date.today() - timedelta(7)):
-#         # print("last week")
-#         query = [('COMP1333 - 1A', datetime.strptime('16::30::00', '%H::%M::%S').time(), datetime.strptime('17::30::00', '%H::%M::%S').time(), 'MWT2', 3, 1),
-#         ('COMP1323 - 1A', datetime.strptime('13::30::00', '%H::%M::%S').time(), datetime.strptime('14::30::00', '%H::%M::%S').time(), 'MWT2', 2, 0)]
-#     elif (aDate == date.today()):
-#         query = [('COMP1344 - 1A', datetime.strptime('08::30::00', '%H::%M::%S').time(), datetime.strptime('10::30::00', '%H::%M::%S').time(), 'MWT2', 2, 1),
-#         ('COMP1323 - 1A', datetime.strptime('10::30::00', '%H::%M::%S').time(), datetime.strptime('12::30::00', '%H::%M::%S').time(), 'MWT2', 2, 0)]
-#     else:
-#         query = []
+
 
 def get_log():
-    #### query #####
     logs = getLog(current_student_id)
-#     logs = []
-#     log = [00000000, datetime.strptime('22-10-20 00:00:00', '%y-%m-%d %H:%M:%S'), datetime.strptime('22-10-20 00:05:03', '%y-%m-%d %H:%M:%S'), datetime.strptime('00:05:03', '%H:%M:%S')]
-#     for i in range(0,40):
-#         log[0] += 1
-#         logs.append(tuple(log))
     _logs = []
-    for i in range(1,40):
+    for i in range(0, len(logs)):
         _logs.append([(8-len(str(logs[i][0])))*'0'+str(logs[i][0]), logs[i][1], logs[i][2], logs[i][3]])
     return _logs
 
 class Window (QWidget, Ui_Window):
-
+    logintime = datetime.now()
     date_to_show = date.today()
     def __init__(self, student, parent=None):
         set_student_info(student)
@@ -74,16 +60,23 @@ class Window (QWidget, Ui_Window):
         self.list_widget.hide()
         self.scroll_bar.hide()
 
-        self.checkBox.stateChanged.connect(lambda:self.toddle_tutorials())
-        self.checkBox_2.stateChanged.connect(lambda:self.toddle_lectures())
+        self.checkBox.stateChanged.connect(lambda: self.toddle_tutorials())
+        self.checkBox_2.stateChanged.connect(lambda: self.toddle_lectures())
         self.pushButton.clicked.connect(lambda: self.show_next_week())
         self.pushButton_2.clicked.connect(lambda:self.show_previous_week())
         self.toLog.clicked.connect(lambda: self.jump_to_log())
         self.tottb.clicked.connect(lambda: self.jump_to_ttb())
-    
+        self.logOut.clicked.connect(self.close)
+        
+    def closeEvent(self, evnt):
+        super(Window, self).closeEvent(evnt)
+        addLog(current_student_id, self.logintime)
+        evnt.accept()
+        
     def set_welcome_msg(self):
-        get_wel_msg()
+        get_wel_msg(self.logintime)
         self.welcomemsg.setText(QtCore.QCoreApplication.translate("Form", welcome_msg))
+        self.welcomemsg.setFont(QFont('Georgia', 18))
 
     def jump_to_log(self):
         self.gridLayoutWidget.hide()
@@ -129,8 +122,8 @@ class Window (QWidget, Ui_Window):
             log_id = log[0]
             login_time = log[1].strftime("%y-%m-%d %H:%M:%S")
             logout_time = log[2].strftime("%y-%m-%d %H:%M:%S")
-            duration = log[3].strftime("%H:%M:%S")
-            # duration = '{:02}:{:02}:{:02}'.format((log[2]-log[1]).seconds//3600, ((log[2]-log[1]).seconds//60%60, ((log[2]-log[1]).seconds)%60)
+            # duration = log[3].strftime("%H:%M:%S")
+            duration = '{:02}:{:02}:{:02}'.format(log[3].seconds//3600, log[3].seconds//60%60, log[3].seconds%60)
             # log_entry = ('', log[0], '      |      ', login_time,'   |   ', logout_time,'      |       ', duration)
             newlog = QListWidgetItem('{:9s} {:8s} {:3s} {:19s} {:3s} {:19s} {:3s} {:8s}'.format('', log_id, '      |      ', login_time,'   |   ', logout_time,'      |       ', duration))
             newlog.setFont(QFont('Menlo', 13))
@@ -150,7 +143,8 @@ class Window (QWidget, Ui_Window):
             # newClass.setAccessibleName(label_name)
 
             coursecode = item[0]
-            class_time = str(item[1].hour)+":"+str(item[1].minute)+ " - " + str(item[2].hour)+":"+str(item[2].minute)
+            # print(type(item[1]), ';' ,type(item[2]))
+            class_time = str(item[1].seconds//3600)+":"+str((item[1].seconds//60)%60)+ " - " + str(item[2].seconds//3600)+":"+str((item[2].seconds//60)%60)
             room = item[3]
             class_info = coursecode + "\n" + class_time + "\n" + room
             newClass.setText(QtCore.QCoreApplication.translate("Form", class_info))
@@ -161,8 +155,8 @@ class Window (QWidget, Ui_Window):
                 color = "#64E986"
             newClass.setStyleSheet("background-color: "+color)
 
-            hr = int(item[2].hour-item[1].hour)
-            row_num = int(item[1].hour) - 8 + 1
+            hr = int(item[2].seconds//3600-item[1].seconds//3600)
+            row_num = int(item[1].seconds//3600) - 8 + 1
             col_num = 0
             if (item[4] == 6):
                 col_num = 1
@@ -202,7 +196,7 @@ class Window (QWidget, Ui_Window):
         checked = self.checkBox.isChecked()
         for item in query:
             if (item[5] == 0):
-                row_num = int(item[1].hour) - 8 + 1
+                row_num = int(item[1].seconds//3600) - 8 + 1
                 col_num = 0
                 if (item[4] == 6):
                     col_num = 1
@@ -218,7 +212,7 @@ class Window (QWidget, Ui_Window):
         checked = self.checkBox_2.isChecked()
         for item in query:
             if (item[5] == 1):
-                row_num = int(item[1].hour) - 8 + 1
+                row_num = int(item[1].seconds//3600) - 8 + 1
                 col_num = 0
                 if (item[4] == 6):
                     col_num = 1
@@ -235,7 +229,7 @@ class Window (QWidget, Ui_Window):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    myWin = Window(student_name)
+    myWin = Window("JEFF")
 
     myWin.show()
 

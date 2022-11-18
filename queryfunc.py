@@ -24,22 +24,24 @@ cursor = db_connection.cursor()
 
 def getClasses(d, current_student_id):
     #get lectures
-    cursor.execute("""SELECT L.course_id,L.starttime,L.endtime,L.room, WEEKDAY(L.date) FROM (SELECT course_id FROM Study WHERE student_id = '%s') AS courseids, Lecture L WHERE courseids.course_id = L.course_id AND YEARWEEK(date) = YEARWEEK('%s');"""%(current_student_id,d))
+    cursor.execute("""SELECT L.course_id,L.starttime,L.endtime,L.room, WEEKDAY(L.date) FROM (SELECT course_id FROM Study WHERE student_id = '%s') AS courseids, Lecture L 
+    WHERE courseids.course_id = L.course_id AND YEARWEEK(date) = YEARWEEK('%s');"""%(current_student_id,d))
     ret1 = cursor.fetchall()
     # get tutorials
     cursor.execute("""SELECT T.course_id, T.starttime, T.endtime, T.room, WEEKDAY(T.date) FROM (SELECT course_id FROM Study WHERE student_id = '%s') AS courseids, Tutorial T 
-	WHERE courseids.course_id = T.course_id
-    AND YEARWEEK(T.date) = YEARWEEK(%s);"""% (current_student_id,d))
+	WHERE courseids.course_id = T.course_id AND YEARWEEK(T.date) = YEARWEEK('%s');"""% (current_student_id,d))
     ret2 = cursor.fetchall()
 
+    ret = []
     for i in ret1:
-        i = (*i,True)
+        j = (i[0], i[1], i[2], i[3], i[4], 1)
+        ret.append(j)
      
-    for j in ret2:
-        j = (*j,False)
-        ret1.append(j)
+    for i in ret2:
+        j = (i[0], i[1], i[2], i[3], i[4], 0)
+        ret.append(j)
         
-    return ret1
+    return ret
 
 #-----------------------------------------
 
@@ -92,11 +94,11 @@ WHERE Tch.teacher_id = T.teacher_id;""" %courseid, classid)
 #----------------------------------------
 
 #-------create log (right after login)-------------
-def addLog(current_student_id):
+def addLog(current_student_id, logintime):
 	cursor.execute("SELECT log_id FROM Log WHERE Log.student_id = '%s' ORDER BY login_time DESC LIMIT 1;"% current_student_id)
 	results = cursor.fetchall()
-	currentlog = results[0] + 1
-	cursor.execute("INSERT INTO Log VALUES (%s,%s,%s,%s);"% (currentlog, current_student_id, logintime, datetime.now()))
+	currentlog = results[0][0]+1
+	cursor.execute("INSERT INTO Log VALUES (%s,'%s','%s','%s');"% (currentlog, current_student_id, logintime, datetime.now()))
 	db_connection.commit()
 #----------------------------------------
 
@@ -117,12 +119,15 @@ def getLog(current_student_id):
 	results = cursor.fetchall()
 	return results
 
-#------------------------
+#-----------get last log-------------
+
+def getLastLog(current_student_id):
+	cursor.execute("SELECT login_time FROM Log WHERE Log.student_id = '%s' ORDER BY login_time DESC LIMIT 1;"% current_student_id)
+	results = cursor.fetchall()
+	return results
 
 def getStudentInfo(current_student_id):
 
     cursor.execute("SELECT student_id, email_address FROM Student WHERE name = '%s';" %student_name)
     results = cursor.fetchall()
     return results
-
-
