@@ -89,8 +89,10 @@ def addLog():
 	db_connection.commit()
 #----------------------------------------
 
+
+
 #-------update log-----------------
-#UPDATE Student SET current_login_time = ? WHERE Student_id = ?;""",(logintime, current_student_id))
+#update logout_time when user log out AND EVERY SMALL TIME INTERVAL (use a while loop with sleep()) !!!!!!!!!!!!!!!
 def updateLog():
 	cursor.execute("UPDATE Log SET logout_time = ? WHERE log_id = ?;",(datetime.now(),currentlog))
 	db_connection.commit()
