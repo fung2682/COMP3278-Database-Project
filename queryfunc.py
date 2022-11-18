@@ -7,6 +7,7 @@ from datetime import datetime
 current_student_id = "0001"
 logintime = datetime.now()
 currentlog = 1
+student_name  = "JEFF" 
 
 #-------------connect mysql-----------------
 
@@ -122,6 +123,6 @@ def getLog():
 #------------------------
 
 def getStudentInfo():
-    cursor.execute("""SELECT name, email_address FROM Student WHERE Student_id = ?;""", (current_student_id))
+    cursor.execute("""SELECT student_id, email_address FROM Student WHERE name = ?;""", (student_name))
     results = cursor.fetchall()
     return results
