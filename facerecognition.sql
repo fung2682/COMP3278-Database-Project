@@ -79,22 +79,23 @@ DROP TABLE IF EXISTS `news_announcement`;
 CREATE TABLE `news_announcement` (
   `course_id` varchar(12) NOT NULL,
   `news_announcement` varchar(1000) NOT NULL,
+  `update_time` datetime NOT NULL,
   PRIMARY KEY(course_id, news_announcement),
   FOREIGN KEY(course_id) REFERENCES Course(course_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO news_announcement (course_id, news_announcement)
-VALUES ("COMP3278_1A","Dear students, We will resume face-to-face teaching tomorrow."),
+INSERT INTO news_announcement (course_id, news_announcement, update_time)
+VALUES ("COMP3278_1A","Dear students, We will resume face-to-face teaching tomorrow.", NOW()),
 ("COMP3230_1A","Hi all,
 
 The attached file is the summary of the mid-term exam. If you have any questions, please feel free to contact me.
 
 Best,
 
-Xie ZHANG"),
+Xie ZHANG", NOW()),
 ("COMP3278_1A","""News！
 
-Aug. 25, 2022: Welcome to COMP3278A! The slides and videos of the lectures and tutorials will be released. The slides are ".pdf" files with one slide on one page (1-by-1 scheme). Please print multiple pages (slides) on one paper in order to play green. Thanks for saving papers! """);
+Aug. 25, 2022: Welcome to COMP3278A! The slides and videos of the lectures and tutorials will be released. The slides are .pdf files with one slide on one page (1-by-1 scheme). Please print multiple pages (slides) on one paper in order to play green. Thanks for saving papers! """,NOW());
 
 DROP TABLE IF EXISTS `Log`;
 
