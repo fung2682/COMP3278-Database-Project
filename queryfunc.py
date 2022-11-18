@@ -22,7 +22,7 @@ cursor = db_connection.cursor()
 #-------get timetable data----------------
 #index: 0: course_id, 1: starttime, 2: endtime, 3:room, 4: weekday, 5:islecture
 
-def getClasses(d):
+def getClasses(d, current_student_id):
     #get lectures
     cursor.execute("""SELECT L.course_id,L.starttime,L.endtime,L.room, WEEKDAY(L.date) FROM (SELECT course_id FROM Study WHERE student_id = '%s') AS courseids, Lecture L WHERE courseids.course_id = L.course_id AND YEARWEEK(date) = YEARWEEK('%s');"""%(current_student_id,d))
     ret1 = cursor.fetchall()
@@ -45,7 +45,7 @@ def getClasses(d):
 
 #--------check for classes in a hour-------
 #index:0: course_id, 1: class_id, 2: date, 3: starttime, 4: endtime, 5: room, 6: zoom_link, 7: news_announcement(list), 8. note_link (list), 9: course_teacher (2D list), 10: class_teacher (tuple), 11: class type
-def checkclass():
+def checkclass(current_student_id):
     cursor.execute("""SELECT L.course_id, L.class_id, L.date, L.starttime, L.endtime, L.room, L.zoom_link FROM (SELECT course_id FROM Study WHERE student_id = '%s') AS courseids, Lecture L WHERE courseids.course_id = L.course_id
 	AND L.date = CURRENT_DATE
 	AND TIMEDIFF(CURRENT_TIME, L.starttime) >= '00:00'
@@ -92,7 +92,7 @@ WHERE Tch.teacher_id = T.teacher_id;""" %courseid, classid)
 #----------------------------------------
 
 #-------create log (right after login)-------------
-def addLog():
+def addLog(current_student_id):
 	cursor.execute("SELECT log_id FROM Log WHERE Log.student_id = '%s' ORDER BY login_time DESC LIMIT 1;"% current_student_id)
 	results = cursor.fetchall()
 	currentlog = results[0] + 1
@@ -104,7 +104,7 @@ def addLog():
 
 #-------update log-----------------
 #update logout_time when user log out AND EVERY SMALL TIME INTERVAL (use a while loop with sleep()) !!!!!!!!!!!!!!!
-def updateLog():
+def updateLog(current_student_id):
 	cursor.execute("UPDATE Log SET logout_time = %s WHERE log_id = %s;"%(datetime.now(),currentlog))
 	db_connection.commit()
 
@@ -112,14 +112,14 @@ def updateLog():
 
 #----------get log-------
 
-def getLog():
+def getLog(current_student_id):
 	cursor.execute("""SELECT log_id, login_time, logout_time, TIMEDIFF(logout_time,login_time) AS Duration FROM Log WHERE student_id = '%s' ORDER BY login_time DESC;""" %(current_student_id))
 	results = cursor.fetchall()
 	return results
 
 #------------------------
 
-def getStudentInfo():
+def getStudentInfo(current_student_id):
 
     cursor.execute("SELECT student_id, email_address FROM Student WHERE name = '%s';" %student_name)
     results = cursor.fetchall()
