@@ -71,7 +71,7 @@ def checkclass():
 WHERE Tch.teacher_id = T.teacher_id OR Tch.teacher_id = L.teacher_id;""", (courseid))
         ret4 = cursor.fetchall()
         cursor.execute("""SELECT Tch.teacher_id,Tch.name, Tch.email,Tch.office FROM Teacher Tch, (SELECT DISTINCT teacher_id FROM Lecturer WHERE course_id = ? AND class_id = ?) AS L
-WHERE Tch.teacher_id = L.teacher_id;""", , (courseid, classid))
+WHERE Tch.teacher_id = L.teacher_id;""", (courseid, classid))
         ret5 = cursor.fetchall()
         ret5 = ret5[0]
         ret[0] = (*ret[0],ret2,ret3,ret4,ret5, "Lecture")
@@ -86,7 +86,7 @@ WHERE Tch.teacher_id = L.teacher_id;""", , (courseid, classid))
 WHERE Tch.teacher_id = T.teacher_id OR Tch.teacher_id = L.teacher_id;""", (courseid))
         ret4 = cursor.fetchall()
         cursor.execute("""SELECT Tch.teacher_id,Tch.name, Tch.email,Tch.office FROM Teacher Tch, (SELECT DISTINCT teacher_id FROM Tutor WHERE course_id = ? AND class_id = ?) AS T
-WHERE Tch.teacher_id = T.teacher_id;""", , (courseid, classid))
+WHERE Tch.teacher_id = T.teacher_id;""" , (courseid, classid))
         ret5 = cursor.fetchall()
         ret5 = ret5[0]
         ret[0] = (*ret[0],ret2,ret3,ret4,ret5,"Tutorial")
