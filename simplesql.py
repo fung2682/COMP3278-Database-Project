@@ -6,7 +6,7 @@ from datetime import datetime
 #get student id -> current_student_id
 current_student_id = "0001"
 logintime = datetime.now()
-last_log = 1
+currentlog = 1
 
 
 #-------get timetable data----------------
@@ -82,9 +82,21 @@ WHERE Tch.teacher_id = T.teacher_id;""", , (courseid, classid))
 
 #-------create log (right after login)-------------
 def addLog():
-	cursor.execute("INSERT INTO Log VALUES (?,?,?,?);",(last_log,current_student_id, logintime, datetime.now()))
+	cursor.execute("SELECT log_id FROM Log WHERE Log.student_id = ? ORDER BY login_time DESC LIMIT 1;", current_student_id)
+	results = cursor.fetchall()
+	currentlog = results[0] +1
+	cursor.execute("INSERT INTO Log VALUES (?,?,?,?);",(currentlog,current_student_id, logintime, datetime.now()))
 	db_connection.commit()
 #----------------------------------------
+
+#-------update log-----------------
+#UPDATE Student SET current_login_time = ? WHERE Student_id = ?;""",(logintime, current_student_id))
+def updateLog():
+	cursor.execute("UPDATE Log SET logout_time = ? WHERE AND log_id = ?;",(datetime.now(),currentlog))
+	db_connection.commit()
+
+#---------------------------------
+
 #-------------connect mysql-----------------
 
 db_connection = mysql.connector.connect(
