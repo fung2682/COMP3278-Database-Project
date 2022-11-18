@@ -122,6 +122,6 @@ def getLog():
 #------------------------
 
 def getStudentInfo():
-    cursor.execute("""SELECT name, current_login_time FROM Student WHERE Student_id = ?;""", (current_student_id))
+    cursor.execute("""SELECT name, current_login_time, email_address FROM Student WHERE Student_id = ?;""", (current_student_id))
     results = cursor.fetchall()
     return results
