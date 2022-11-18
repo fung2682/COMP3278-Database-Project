@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+  <p>Hey {{ name|default('there', true) }}!</p>
+  <p>You have a class within 1 hour. Please magnage to attend the class.</p>
+  <p>Course information below:</p>
+  <p><b>{Course: {course_id}}</b></p>
+  <p><b>{Date: {date}}</b></p>
+  <p><b>{Time: {starttime}} - {{endtime}}</b></p>
+  <p><b>{Room: {course_id}}:</b></p>
+  <p><b>{{course_id}}:</b></p>
+  
+  
+  
+  
+  <ul>
+    <li>Pagespeed</li>
+    <li>Broken links</li>
+    <li>Broken images</li>
+    <li>Blacklists</li>
+    <li>Accessibility</li>
+    <li>And more!</li>
+  </ul>
+  <p>This may take some time, so feel free to go about your day. We will email if we find an issue.</p>
+  <p>As always, feel free to reach out if you ever need anything!</p>
+  <p>~Frank Corso</p>
+  <p><a href="https://sitealert.io">SiteAlert</a></p>
+      <ul id="navigation">
+      {% for item in navigation %}
+          <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
+      {% endfor %}
+      </ul>
+
+      
+      </body>
+</html>
+
