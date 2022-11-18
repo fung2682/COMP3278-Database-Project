@@ -13,12 +13,12 @@ last_log = 1
 #index: 0: course_id, 1: starttime, 2: endtime, 3:room, 4: weekday, 5:islecture
 def getClasses(weekNo):
 	    #get lectures
-	    cursor.execute("""SELECT L.course_id,L.starttime,L.endtime,L.room, WEEKDAY(L.date) FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Lecture L 
+	    cursor.execute("""SELECT L.course_id,L.starttime,L.endtime,L.room, WEEKDAY(L.date) FROM (SELECT course_id FROM Study WHERE student_id = ?) AS courseids, Lecture L 
 	    WHERE courseids.course_id = L.course_id
 	    AND WEEK(L.date) = WEEK(NOW())+?;""", (current_student_id,weekNo))
 	    class1 = cursor.fetchall()
 	    # get tutorials
-	    cursor.execute("""SELECT T.course_id, T.starttime, T.endtime, T.room, WEEKDAY(T.date) FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Tutorial T 
+	    cursor.execute("""SELECT T.course_id, T.starttime, T.endtime, T.room, WEEKDAY(T.date) FROM (SELECT course_id FROM Study WHERE student_id = ?) AS courseids, Tutorial T 
 	    WHERE courseids.course_id = T.course_id
 	    AND WEEK(T.date,0) = WEEK(NOW(),0)+?;""", (current_student_id,weekNo))
 	    class2 = cursor.fetchall()
@@ -35,13 +35,13 @@ def getClasses(weekNo):
 #--------check for classes in a hour-------
 #index:0: course_id, 1: class_id, 2: date, 3: starttime, 4: endtime, 5: room, 6: zoom_link, 7: news_announcement(list), 8. note_link (list), 9: islecture
 def checkclass():
-    	cursor.execute("""SELECT L.course_id, L.class_id, L.date, L.starttime, L.endtime, L.room, L.zoom_link FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Lecture L WHERE courseids.course_id = L.course_id
+    	cursor.execute("""SELECT L.course_id, L.class_id, L.date, L.starttime, L.endtime, L.room, L.zoom_link FROM (SELECT course_id FROM Study WHERE student_id = ?) AS courseids, Lecture L WHERE courseids.course_id = L.course_id
 	AND L.date = CURRENT_DATE
 	AND TIMEDIFF(CURRENT_TIME, L.starttime) >= '00:00'
 	AND TIMEDIFF(CURRENT_TIME, L.starttime) <= '59:59';""",(current_student_id))
     	ret = cursor.fetchall()
     	if not ret:
-		cursor.execute("""SELECT T.course_id, T.class_id, T.date, T.starttime, T.endtime, T.room, T.zoom_link FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Tutorial T WHERE courseids.course_id = T.course_id
+		cursor.execute("""SELECT T.course_id, T.class_id, T.date, T.starttime, T.endtime, T.room, T.zoom_link FROM (SELECT course_id FROM Study WHERE student_id = ?) AS courseids, Tutorial T WHERE courseids.course_id = T.course_id
 		AND T.date = CURRENT_DATE
 		AND TIMEDIFF(CURRENT_TIME, T.starttime) >= '00:00'
 		AND TIMEDIFF(CURRENT_TIME, T.starttime) <= '59:59';""",(current_student_id))
@@ -49,18 +49,18 @@ def checkclass():
 		if not ret:
 			return NULL
 		courseid = ret[0][0]
-		cursor.execute("""news_announcement FROM news_announcement WHERE course_id = "?";""", (courseid))
+		cursor.execute("""news_announcement FROM news_announcement WHERE course_id = ?;""", (courseid))
 		ret2 = cursor.fetchall()
 		classid = ret[0][1]
-		cursor.execute("""SELECT note_link FROM Tutorial_Note WHERE course_id = "?" AND class_id = "?";""", (courseid, classid))
+		cursor.execute("""SELECT note_link FROM Tutorial_Note WHERE course_id = ? AND class_id = ?;""", (courseid, classid))
 		ret3 = cursor.fetchall()
 		ret[0] = (*ret[0],ret2,ret3,True)
     	else:
 		courseid = ret[0][0]
-		cursor.execute("""news_announcement FROM news_announcement WHERE course_id = "?";""", (courseid))
+		cursor.execute("""news_announcement FROM news_announcement WHERE course_id = ?;""", (courseid))
 		ret2 = cursor.fetchall()
 		classid = ret[0][1]
-		cursor.execute("""SELECT note_link FROM Lecture_Note WHERE course_id = "?" AND class_id = "?";""", (courseid, classid))
+		cursor.execute("""SELECT note_link FROM Lecture_Note WHERE course_id = ? AND class_id = ?;""", (courseid, classid))
 		ret3 = cursor.fetchall()
 		ret[0] = (*ret[0],ret2,ret3,False)
     	return ret
@@ -81,46 +81,46 @@ cursor = db_connection.cursor()
 
 #-----------get courseIDs-------------------
 
-cursor.execute("""SELECT course_id AS courseids FROM Study WHERE student_id = "?";""", (current_student_id))
+cursor.execute("""SELECT course_id AS courseids FROM Study WHERE student_id = ?;""", (current_student_id))
 results = cursor.fetchall()
 
 #-------------------------------------------
 
 #-----------Update current login time-------------
 
-cursor.execute("""UPDATE Student SET current_login_time = ? WHERE Student_id = "?";""",(logintime, current_student_id))
+cursor.execute("""UPDATE Student SET current_login_time = ? WHERE Student_id = ?;""",(logintime, current_student_id))
 db_connection.commit()
 
 #-------------------------------------------------
 
 #-----------for welcome message-------------------
 
-cursor.execute("""SELECT name, current_login_time FROM Student WHERE Student_id = "?";""", (current_student_id))
+cursor.execute("""SELECT name, current_login_time FROM Student WHERE Student_id = ?;""", (current_student_id))
 results = cursor.fetchall()
 
 #-------------------------------------------
 
 #-----------get LogInfo-------------------
 
-cursor.execute("""SELECT * FROM Log WHERE Log.student_id = "?" ORDER BY login_time DESC;""", (current_student_id))
+cursor.execute("""SELECT * FROM Log WHERE Log.student_id = ? ORDER BY login_time DESC;""", (current_student_id))
 results = cursor.fetchall()
 
 #-------------------------------------------
 
 #-----------get course announcements-------------------
 
-cursor.execute("""SELECT NA.course_id, NA.news_announcement FROM news_announcement NA, (SELECT course_id FROM Study WHERE student_id = "?") AS courseids WHERE NA.course_id = courseids.course_id;""", (current_student_id))
+cursor.execute("""SELECT NA.course_id, NA.news_announcement FROM news_announcement NA, (SELECT course_id FROM Study WHERE student_id = ?) AS courseids WHERE NA.course_id = courseids.course_id;""", (current_student_id))
 results = cursor.fetchall()
 
 #-------------------------------------------
 
 #---------get Lectures--------------
-cursor.execute("""SELECT * FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Lecture L WHERE courseids.course_id = L.course_id;""", (current_student_id))
+cursor.execute("""SELECT * FROM (SELECT course_id FROM Study WHERE student_id = ?) AS courseids, Lecture L WHERE courseids.course_id = L.course_id;""", (current_student_id))
 results = cursor.fetchall()
 #-----------------------------------
 
 #-----------get Tutorials-------------------
-cursor.execute("""SELECT * FROM (SELECT course_id FROM Study WHERE student_id = "?") AS courseids, Tutorial T WHERE courseids.course_id = T.course_id;""", (current_student_id))
+cursor.execute("""SELECT * FROM (SELECT course_id FROM Study WHERE student_id = ?) AS courseids, Tutorial T WHERE courseids.course_id = T.course_id;""", (current_student_id))
 results = cursor.fetchall()
 
 #-------------------------------------------
