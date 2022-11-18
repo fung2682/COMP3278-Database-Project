@@ -47,7 +47,7 @@ def checkclass():
 		AND TIMEDIFF(CURRENT_TIME, T.starttime) <= '59:59';""",(current_student_id))
 		ret = cursor.fetchall()
 		if not ret:
-			return NULL
+			return None
 		courseid = ret[0][0]
 		cursor.execute("""news_announcement FROM news_announcement WHERE course_id = ?;""", (courseid))
 		ret2 = cursor.fetchall()
