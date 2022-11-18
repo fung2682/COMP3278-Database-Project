@@ -33,7 +33,7 @@ def getClasses(weekNo):
 #-----------------------------------------
 
 #--------check for classes in a hour-------
-#index:0: course_id, 1: class_id, 2: date, 3: starttime, 4: endtime, 5: room, 6: zoom_link, 7: news_announcement(list), 8. note_link (list), 9: class type
+#index:0: course_id, 1: class_id, 2: date, 3: starttime, 4: endtime, 5: room, 6: zoom_link, 7: news_announcement(list), 8. note_link (list), 9: course_teacher (2D list), 10: class_teacher (tuple), 11: class type
 def checkclass():
     	cursor.execute("""SELECT L.course_id, L.class_id, L.date, L.starttime, L.endtime, L.room, L.zoom_link FROM (SELECT course_id FROM Study WHERE student_id = ?) AS courseids, Lecture L WHERE courseids.course_id = L.course_id
 	AND L.date = CURRENT_DATE
@@ -54,6 +54,12 @@ def checkclass():
 		classid = ret[0][1]
 		cursor.execute("""SELECT note_link FROM Tutorial_Note WHERE course_id = ? AND class_id = ?;""", (courseid, classid))
 		ret3 = cursor.fetchall()
+		cursor.execute("""SELECT Tch.teacher_id,Tch.name, Tch.email,Tch.office FROM Teacher Tch, (SELECT DISTINCT teacher_id FROM `Lecturer` WHERE course_id = ?) AS L, (SELECT DISTINCT teacher_id FROM `Tutor` WHERE course_id = ?) AS T
+WHERE Tch.teacher_id = T.teacher_id OR Tch.teacher_id = L.teacher_id;""", (courseid))
+		ret4 = cursor.fetchall()
+		cursor.execute()
+		ret5 = cursor.fetchall()
+		ret5 = ret5[0]
 		ret[0] = (*ret[0],ret2,ret3,"Lecture")
     	else:
 		courseid = ret[0][0]
