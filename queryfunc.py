@@ -24,14 +24,14 @@ cursor = db_connection.cursor()
 #-------get timetable data----------------
 #index: 0: course_id, 1: starttime, 2: endtime, 3:room, 4: weekday, 5:islecture
 
-def getClasses(weekNo):
+def getClasses(d):
     #get lectures
-    cursor.execute("""SELECT L.course_id,L.starttime,L.endtime,L.room, WEEKDAY(L.date) FROM (SELECT course_id FROM Study WHERE student_id = ?) AS courseids, Lecture L WHERE courseids.course_id = L.course_id AND WEEK(L.date) = WEEK(NOW())+?;""", (current_student_id,weekNo))
+    cursor.execute("""SELECT L.course_id,L.starttime,L.endtime,L.room, WEEKDAY(L.date) FROM (SELECT course_id FROM Study WHERE student_id = ?) AS courseids, Lecture L WHERE courseids.course_id = L.course_id AND WEEK(L.date,0) = WEEK(?,0) AND YEAR(L.date) = YEAR(?);""", (current_student_id,d))
     ret1 = cursor.fetchall()
     # get tutorials
     cursor.execute("""SELECT T.course_id, T.starttime, T.endtime, T.room, WEEKDAY(T.date) FROM (SELECT course_id FROM Study WHERE student_id = ?) AS courseids, Tutorial T 
 	WHERE courseids.course_id = T.course_id
-    AND WEEK(T.date,0) = WEEK(NOW(),0)+?;""", (current_student_id,weekNo))
+    AND WEEK(T.date,0) = WEEK(d,0) AND YEAR(T.date) = YEAR(?);""", (current_student_id,d))
     ret2 = cursor.fetchall()
 
     for i in ret1:
