@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets
-from ttb import Ui_Form
+from ttbv2 import Ui_Form
 import sys
 from datetime import date, timedelta
 
