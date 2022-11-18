@@ -2,6 +2,8 @@
 
 Face recognition using python and mysql.
 
+Download the facerecongnition.rar https://drive.google.com/file/d/1LmMXXGe44iV6_3_urWJKKCrwo1FdBuJ0/view?usp=share_link, unzip it and put it in the directory.
+
 ER diagram and table schema: https://lucid.app/lucidchart/0cda9294-7e3f-4bd9-b581-e807c26228fb/edit?invitationId=inv_1dd04901-a65a-4050-9e70-ca0c72d42fdd&page=0_0#
 
 Images upload: https://connecthkuhk-my.sharepoint.com/:f:/g/personal/u3568959_connect_hku_hk/Et1vHI7qyMhBpsS7EQ1ZSKYB7qZLHwvrlYdYOUEa15fjEA?e=cDjXQl
