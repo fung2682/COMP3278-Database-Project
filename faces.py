@@ -7,8 +7,16 @@ import pickle
 from datetime import datetime
 import sys
 
+
+from main_ttb import MainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow
+
+
+from datetime import date, timedelta
+import time
+
 # 1 Create database connection
-myconn = mysql.connector.connect(host="localhost", user="root", passwd="123456", database="facerecognition")
+myconn = mysql.connector.connect(host="localhost", user="root", passwd="1111", database="facerecognition")
 date = datetime.utcnow()
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
@@ -61,7 +69,8 @@ while True:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), (2))
 
             # Find the student's information in the database.
-            select = "SELECT student_id, name, DAY(login_date), MONTH(login_date), YEAR(login_date) FROM Student WHERE name='%s'" % (name)
+            ##select = "SELECT student_id, name, DAY(login_date), MONTH(login_date), YEAR(login_date) FROM Student WHERE name='%s'" % (name)
+            select = "SELECT student_id, name FROM Student WHERE name='%s'" % (name)
             name = cursor.execute(select)
             result = cursor.fetchall()
             # print(result)
@@ -85,14 +94,26 @@ while True:
                         timetable for the student.
 
                 """
+                cap.release()
+                cv2.destroyAllWindows()
+                app = QApplication(sys.argv)
+
+                myWin = MainWindow()
+
+                myWin.show()
+
+
+
+
+                sys.exit(app.exec_())
                 # Update the data in database
-                update =  "UPDATE Student SET login_date=%s WHERE name=%s"
-                val = (date, current_name)
-                cursor.execute(update, val)
-                update = "UPDATE Student SET login_time=%s WHERE name=%s"
-                val = (current_time, current_name)
-                cursor.execute(update, val)
-                myconn.commit()
+                ###update =  "UPDATE Student SET login_date=%s WHERE name=%s"
+                ###val = (date, current_name)
+                ###cursor.execute(update, val)
+                ###update = "UPDATE Student SET login_time=%s WHERE name=%s"
+                ###val = (current_time, current_name)
+                ###cursor.execute(update, val)
+                ###myconn.commit()
                
                 hello = ("Hello ", current_name, "You did attendance today")
                 print(hello)
