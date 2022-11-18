@@ -76,14 +76,19 @@ class Window (QWidget, Ui_Window):
         self.list_widget.hide()
         self.scroll_bar.hide()
 
-        self.checkBox.stateChanged.connect(lambda:self.toddle_tutorials())
-        self.checkBox_2.stateChanged.connect(lambda:self.toddle_lectures())
+        self.checkBox.stateChanged.connect(lambda: self.toddle_tutorials())
+        self.checkBox_2.stateChanged.connect(lambda: self.toddle_lectures())
         self.pushButton.clicked.connect(lambda: self.show_next_week())
         self.pushButton_2.clicked.connect(lambda:self.show_previous_week())
         self.toLog.clicked.connect(lambda: self.jump_to_log())
         self.tottb.clicked.connect(lambda: self.jump_to_ttb())
         self.aboutToQuit.connect(lambda: addLog(current_student_id))
-    
+        self.logOut.clicked.connect(self.close)
+        
+    def closeEvent(self, evnt):
+        addLog(current_student_id)
+        super(Window, self).closeEvent(evnt)
+        
     def set_welcome_msg(self):
         get_wel_msg()
         self.welcomemsg.setText(QtCore.QCoreApplication.translate("Form", welcome_msg))
