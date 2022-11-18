@@ -5,6 +5,7 @@ from PyQt5.QtCore import *
 from Winsetup import Ui_Window
 import sys
 from datetime import datetime, date, timedelta, time
+from queryfunc import getClasses, checkclass, addLog, updateLog, getLog
 
 student_name = ''
 current_student_id = -1
@@ -15,9 +16,9 @@ welcome_msg = []
 def set_student_info(student):
     global student_name, current_student_id, useremail
     student_name = student
-    ###### insert query ########
-    current_student_id = ''
-    useremail = ''
+    info = getStudentInfo(student_name)
+    current_student_id = info[0]
+    useremail = info[1]
 
 def get_wel_msg():
     global welcome_msg
@@ -25,27 +26,29 @@ def get_wel_msg():
 
 def get_ttb_info(aDate):
     global query
+    query = getClasses(aDate, current_student_id)
     # sample
-    if (aDate == date.today() + timedelta(7)):
-        # print("next week")
-        query = [('COMP1323 - 1A', datetime.strptime('08::30::00', '%H::%M::%S').time(), datetime.strptime('09::30::00', '%H::%M::%S').time(), 'MWT2', 5, 1)]
-    elif (aDate == date.today() - timedelta(7)):
-        # print("last week")
-        query = [('COMP1333 - 1A', datetime.strptime('16::30::00', '%H::%M::%S').time(), datetime.strptime('17::30::00', '%H::%M::%S').time(), 'MWT2', 3, 1),
-        ('COMP1323 - 1A', datetime.strptime('13::30::00', '%H::%M::%S').time(), datetime.strptime('14::30::00', '%H::%M::%S').time(), 'MWT2', 2, 0)]
-    elif (aDate == date.today()):
-        query = [('COMP1344 - 1A', datetime.strptime('08::30::00', '%H::%M::%S').time(), datetime.strptime('10::30::00', '%H::%M::%S').time(), 'MWT2', 2, 1),
-        ('COMP1323 - 1A', datetime.strptime('10::30::00', '%H::%M::%S').time(), datetime.strptime('12::30::00', '%H::%M::%S').time(), 'MWT2', 2, 0)]
-    else:
-        query = []
+#     if (aDate == date.today() + timedelta(7)):
+#         # print("next week")
+#         query = [('COMP1323 - 1A', datetime.strptime('08::30::00', '%H::%M::%S').time(), datetime.strptime('09::30::00', '%H::%M::%S').time(), 'MWT2', 5, 1)]
+#     elif (aDate == date.today() - timedelta(7)):
+#         # print("last week")
+#         query = [('COMP1333 - 1A', datetime.strptime('16::30::00', '%H::%M::%S').time(), datetime.strptime('17::30::00', '%H::%M::%S').time(), 'MWT2', 3, 1),
+#         ('COMP1323 - 1A', datetime.strptime('13::30::00', '%H::%M::%S').time(), datetime.strptime('14::30::00', '%H::%M::%S').time(), 'MWT2', 2, 0)]
+#     elif (aDate == date.today()):
+#         query = [('COMP1344 - 1A', datetime.strptime('08::30::00', '%H::%M::%S').time(), datetime.strptime('10::30::00', '%H::%M::%S').time(), 'MWT2', 2, 1),
+#         ('COMP1323 - 1A', datetime.strptime('10::30::00', '%H::%M::%S').time(), datetime.strptime('12::30::00', '%H::%M::%S').time(), 'MWT2', 2, 0)]
+#     else:
+#         query = []
 
 def get_log():
     #### query #####
-    logs = []
-    log = [00000000, datetime.strptime('22-10-20 00:00:00', '%y-%m-%d %H:%M:%S'), datetime.strptime('22-10-20 00:05:03', '%y-%m-%d %H:%M:%S'), datetime.strptime('00:05:03', '%H:%M:%S')]
-    for i in range(0,40):
-        log[0] += 1
-        logs.append(tuple(log))
+    logs = getLog(current_student_id)
+#     logs = []
+#     log = [00000000, datetime.strptime('22-10-20 00:00:00', '%y-%m-%d %H:%M:%S'), datetime.strptime('22-10-20 00:05:03', '%y-%m-%d %H:%M:%S'), datetime.strptime('00:05:03', '%H:%M:%S')]
+#     for i in range(0,40):
+#         log[0] += 1
+#         logs.append(tuple(log))
     _logs = []
     for i in range(1,40):
         _logs.append([(8-len(str(logs[i][0])))*'0'+str(logs[i][0]), logs[i][1], logs[i][2], logs[i][3]])
