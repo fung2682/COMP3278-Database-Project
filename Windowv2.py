@@ -83,7 +83,7 @@ class Window (QWidget, Ui_Window):
         self.toLog.clicked.connect(lambda: self.jump_to_log())
         self.tottb.clicked.connect(lambda: self.jump_to_ttb())
         self.aboutToQuit.connect(lambda: addLog(current_student_id))
-        self.logOut.clicked.connect(self.close)
+        self.logOut.clicked.connect(self.close())
         
     def closeEvent(self, evnt):
         addLog(current_student_id)
