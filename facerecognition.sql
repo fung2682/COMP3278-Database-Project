@@ -156,7 +156,7 @@ CREATE TABLE `Lecture_Note` (
   FOREIGN KEY(course_id) REFERENCES Course(course_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO Lecture (course_id, class_id, note_link)
+INSERT INTO Lecture_Note (course_id, class_id, note_link)
 VALUES ("COMP3278_1A", "1", "https://moodle.hku.hk/mod/resource/view.php?id=2665229"),
 ("COMP3278_1A", "2", "https://moodle.hku.hk/mod/resource/view.php?id=2694930"),
 ("COMP3230_1A", "1", "https://moodle.hku.hk/mod/resource/view.php?id=2639596"),
@@ -174,8 +174,60 @@ CREATE TABLE `Tutorial_Note` (
   FOREIGN KEY(course_id) REFERENCES Course(course_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO Tutorial (course_id, class_id, note_link)
+INSERT INTO Tutorial_Note (course_id, class_id, note_link)
 VALUES ("COMP3278_1A", "1", "https://moodle.hku.hk/mod/resource/view.php?id=2668112");
+
+DROP TABLE IF EXISTS `Teacher`;
+
+-- Create TABLE 'Teacher'
+CREATE TABLE `Teacher` (
+  `teacher_id` varchar(10) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `office` varchar(50),
+  PRIMARY KEY(teacher_id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO Teacher (teacher_id, name, email, office)
+VALUES ("cs1", "Ping Luo", "pluo@cs.hku.hk", "CB326"),
+("cs2","Yao Mu", "muyao@connect.hku.hk","CB123"),
+("cs3","Yao Lai","laiyao@connect.hku.hk", "CB123"),
+("cs4","Yizhou Li", "liyizhuo@connect.hku.hk", "CB123");
+
+
+DROP TABLE IF EXISTS `Lecturer`;
+
+-- Create TABLE 'Lecturer'
+CREATE TABLE `Lecturer` (
+  `course_id` varchar(12) NOT NULL,
+  `class_id` varchar(3) NOT NULL,
+  `teacher_id` varchar(10) NOT NULL,
+  PRIMARY KEY(course_id,class_id,teacher_id),
+  FOREIGN KEY(class_id) REFERENCES Lecture(class_id),
+  FOREIGN KEY(course_id) REFERENCES Course(course_id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO Lecturer (course_id, class_id, teacher_id)
+VALUES ("COMP3278_1A", "1", "cs1"),
+("COMP3278_1A", "2", "cs1"),
+("COMP3230_1A", "1", "cs1"),
+("COMP3230_1A", "2", "cs1");
+
+DROP TABLE IF EXISTS `Tutor`;
+
+-- Create TABLE 'Tutor'
+CREATE TABLE `Tutor` (
+  `course_id` varchar(12) NOT NULL,
+  `class_id` varchar(3) NOT NULL,
+  `teacher_id` varchar(10) NOT NULL,
+  PRIMARY KEY(course_id,class_id,teacher_id),
+  FOREIGN KEY(class_id) REFERENCES Tutorial(class_id),
+  FOREIGN KEY(course_id) REFERENCES Course(course_id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO Tutor (course_id, class_id, teacher_id)
+VALUES ("COMP3278_1A", "1", "cs2");
+
 
 -- # Create TABLE 'Course'
 -- # Create TABLE 'Classroom'
