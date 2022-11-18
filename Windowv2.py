@@ -5,7 +5,7 @@ from PyQt5.QtCore import *
 from Winsetup import Ui_Window
 import sys
 from datetime import datetime, date, timedelta, time
-from queryfunc import getClasses, checkclass, addLog, updateLog, getLog
+from queryfunc import getClasses, checkclass, addLog, updateLog, getLog, getStudentInfo
 
 student_name = ''
 current_student_id = -1
