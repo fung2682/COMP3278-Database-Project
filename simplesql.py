@@ -80,6 +80,11 @@ WHERE Tch.teacher_id = T.teacher_id;""", , (courseid, classid))
     	return ret
 #----------------------------------------
 
+#-------create log (right after login)-------------
+def addLog():
+	cursor.execute("INSERT INTO Log VALUES (?,?,?,?);",(last_log,current_student_id, logintime, datetime.now()))
+	db_connection.commit()
+#----------------------------------------
 #-------------connect mysql-----------------
 
 db_connection = mysql.connector.connect(
