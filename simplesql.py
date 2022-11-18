@@ -33,7 +33,7 @@ def getClasses(weekNo):
 #-----------------------------------------
 
 #--------check for classes in a hour-------
-#index:0: course_id, 1: class_id, 2: date, 3: starttime, 4: endtime, 5: room, 6: zoom_link, 7: news_announcement(list), 8. note_link (list), 9: islecture
+#index:0: course_id, 1: class_id, 2: date, 3: starttime, 4: endtime, 5: room, 6: zoom_link, 7: news_announcement(list), 8. note_link (list), 9: class type
 def checkclass():
     	cursor.execute("""SELECT L.course_id, L.class_id, L.date, L.starttime, L.endtime, L.room, L.zoom_link FROM (SELECT course_id FROM Study WHERE student_id = ?) AS courseids, Lecture L WHERE courseids.course_id = L.course_id
 	AND L.date = CURRENT_DATE
@@ -54,7 +54,7 @@ def checkclass():
 		classid = ret[0][1]
 		cursor.execute("""SELECT note_link FROM Tutorial_Note WHERE course_id = ? AND class_id = ?;""", (courseid, classid))
 		ret3 = cursor.fetchall()
-		ret[0] = (*ret[0],ret2,ret3,True)
+		ret[0] = (*ret[0],ret2,ret3,"Lecture")
     	else:
 		courseid = ret[0][0]
 		cursor.execute("""news_announcement FROM news_announcement WHERE course_id = ?;""", (courseid))
@@ -62,7 +62,7 @@ def checkclass():
 		classid = ret[0][1]
 		cursor.execute("""SELECT note_link FROM Lecture_Note WHERE course_id = ? AND class_id = ?;""", (courseid, classid))
 		ret3 = cursor.fetchall()
-		ret[0] = (*ret[0],ret2,ret3,False)
+		ret[0] = (*ret[0],ret2,ret3,"Tutorial")
     	return ret
 #----------------------------------------
 
