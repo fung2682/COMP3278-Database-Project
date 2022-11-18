@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  <p>Hey {{ name|default('there', true) }}!</p>
+  <p>You have a class within 1 hour. Please magnage to attend the class.</p>
+  <p>Course information:</p>
+  <txtarea>{{desciption}}</txtarea>
+  <br>
+  <p>Course: <b>{{course_id}} </b></p>
+  <br>
+  <p>Latest Announcements:</p>
+      <ul>
+      {% for item in news_announcement %}
+          <li>{{item}}</li>
+      {% endfor %}
+      </ul>
+  <br>
+  <p>Course Teachers:</p>
+      <ul>
+      {% for item in course_teacher %}
+          <li>Teacher: {{item.name}}<br>Office: {{item.office}}<br>Email: {{item.email}}</li>
+      {% endfor %}
+      </ul>    
+  <br>
+  <br>
+  <p>Class information below:</p>
+  <br>
+  <p>Class: <b>{{classtype}} - {{class_id}}</b></p>
+  <br>
+  <p>Date: <b>{{date}}</b></p>
+  <br>
+  <p>Time: <b>{{starttime}} - {{endtime}}</b></p>
+  <br>
+  <p>{{classtype}} Room: <b>{{room}}</b></p>
+  <br>
+  <p>Class teacher:</p>
+  <p>Teacher: {{class_teacher.name}}/p>
+  <p>Office: {{class_teacher.office}}</p>
+  <p>Email: {{class_teacher.email}}</p>
+  <br>
+  <p>Zoom link: <a href ="{{zoom_link}}">{{zoom_link}}</a></p>
+  <br>
+  <p>{{classtype}} notes:</p>
+      <ul>
+      {% for item in note_link %}
+          <li><a href="{{item}}">{{item}}</a></li>
+      {% endfor %}
+      </ul>
+  <br>
+  
+  
+  <br>
+  <p>Enjoy your class!</p>
+  <br>
+  <p>ICMS</p>
+ </html>
