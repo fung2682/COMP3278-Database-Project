@@ -87,15 +87,10 @@ CREATE TABLE `news_announcement` (
 INSERT INTO news_announcement (course_id, news_announcement, update_time)
 VALUES ("COMP3278_1A","Dear students, We will resume face-to-face teaching tomorrow.", NOW()),
 ("COMP3230_1A","Hi all,
-
 The attached file is the summary of the mid-term exam. If you have any questions, please feel free to contact me.
-
 Best,
-
 Xie ZHANG", NOW()),
-("COMP3278_1A","""News！
-
-Aug. 25, 2022: Welcome to COMP3278A! The slides and videos of the lectures and tutorials will be released. The slides are .pdf files with one slide on one page (1-by-1 scheme). Please print multiple pages (slides) on one paper in order to play green. Thanks for saving papers! """,NOW());
+("COMP3278_1A","Welcome to COMP3278A.", date('2022-8-25'));
 
 DROP TABLE IF EXISTS `Log`;
 
