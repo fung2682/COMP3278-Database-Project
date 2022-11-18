@@ -24,12 +24,12 @@ cursor = db_connection.cursor()
 
 def getClasses(d):
     #get lectures
-    cursor.execute("""SELECT L.course_id,L.starttime,L.endtime,L.room, WEEKDAY(L.date) FROM (SELECT course_id FROM Study WHERE student_id = '%s') AS courseids, Lecture L WHERE courseids.course_id = L.course_id AND WEEK(L.date,0) = WEEK(%s,0) AND YEAR(L.date) = YEAR(%s);"""%(current_student_id,d,d))
+    cursor.execute("""SELECT L.course_id,L.starttime,L.endtime,L.room, WEEKDAY(L.date) FROM (SELECT course_id FROM Study WHERE student_id = '%s') AS courseids, Lecture L WHERE courseids.course_id = L.course_id AND YEARWEEK(date) = YEARWEEK('%s');"""%(current_student_id,d))
     ret1 = cursor.fetchall()
     # get tutorials
     cursor.execute("""SELECT T.course_id, T.starttime, T.endtime, T.room, WEEKDAY(T.date) FROM (SELECT course_id FROM Study WHERE student_id = '%s') AS courseids, Tutorial T 
 	WHERE courseids.course_id = T.course_id
-    AND WEEK(T.date,0) = WEEK(%s,0) AND YEAR(T.date) = YEAR(%s);""", (current_student_id,d,d))
+    AND YEARWEEK(T.date) = YEARWEEK(%s);"""% (current_student_id,d))
     ret2 = cursor.fetchall()
 
     for i in ret1:
@@ -124,3 +124,5 @@ def getStudentInfo():
     cursor.execute("SELECT student_id, email_address FROM Student WHERE name = '%s';" %student_name)
     results = cursor.fetchall()
     return results
+
+
