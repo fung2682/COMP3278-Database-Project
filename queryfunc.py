@@ -62,7 +62,7 @@ def checkclass():
         if not ret:
             return None
         courseid = ret[0][0]
-        cursor.execute("""news_announcement FROM news_announcement WHERE course_id = ?;""", (courseid))
+        cursor.execute("""SELECT news_announcement FROM news_announcement WHERE course_id = ? ORDER BY update_time DESC LIMIT 5;""", (courseid))
         ret2 = cursor.fetchall()
         classid = ret[0][1]
         cursor.execute("""SELECT note_link FROM Tutorial_Note WHERE course_id = ? AND class_id = ?;""", (courseid, classid))
@@ -77,7 +77,7 @@ WHERE Tch.teacher_id = L.teacher_id;""", (courseid, classid))
         ret[0] = (*ret[0],ret2,ret3,ret4,ret5, "Lecture")
     else:
         courseid = ret[0][0]
-        cursor.execute("""news_announcement FROM news_announcement WHERE course_id = ?;""", (courseid))
+        cursor.execute("""SELECT news_announcement FROM news_announcement WHERE course_id = ? ORDER BY update_time DESC LIMIT 5;""", (courseid))
         ret2 = cursor.fetchall()
         classid = ret[0][1]
         cursor.execute("""SELECT note_link FROM Lecture_Note WHERE course_id = ? AND class_id = ?;""", (courseid, classid))
@@ -97,7 +97,7 @@ WHERE Tch.teacher_id = T.teacher_id;""" , (courseid, classid))
 def addLog():
 	cursor.execute("SELECT log_id FROM Log WHERE Log.student_id = ? ORDER BY login_time DESC LIMIT 1;", current_student_id)
 	results = cursor.fetchall()
-	currentlog = results[0] +1
+	currentlog = results[0] + 1
 	cursor.execute("INSERT INTO Log VALUES (?,?,?,?);",(currentlog,current_student_id, logintime, datetime.now()))
 	db_connection.commit()
 #----------------------------------------
