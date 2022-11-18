@@ -54,7 +54,20 @@ CREATE TABLE `Course` (
 
 -- sample value
 INSERT INTO Course (course_id, name, description)
-VALUES ("COMP3278_1A", "Introduction to database management systems", "This course studies the principles, design, administration, and implementation of database management systems. Topics include: entity-relationship model, relational model, relational algebra, database design and normalization, database query languages, indexing schemes, integrity and concurrency control."),
+VALUES ("COMP3278_1A", "Introduction to database management systems", "This course studies the principles, design, administration, and implementation of database management systems. Topics include: entity-relationship model, relational model, relational algebra, database design and normalization, database query languages, indexing schemes, integrity and concurrency control.
+Lectures and Tutorials:
+every Thursday: 1:30pm-3:20pm (Lecture)
+every Monday: 2:30pm-3:20pm (Tutorial)
+
+Venue:  MWT2 and Zoom (F2F and online section will be conducted in parallel for all lectures and tutorials)
+
+Office Hours	Dr. Ping Luo: Every Monday 10:00am-11:00am, CB-326 (By appointment)
+* Please send me an email in advance so that we can better organize the consultation schedule for you.
+Course Assessment:
+2 written assignments (30%, that is 15% for each assignment).
+1 group project (20%).
+1 group SQL challenge (10% bonus).
+Final examination (50%)."),
 ("COMP3230_1A", "Principles of operating systems","Operating system structures, process and thread, CPU scheduling, process synchronization, deadlocks, memory management, file systems, I/O systems and device driver, mass-storage structure and disk scheduling, case studies.");
 
 
@@ -76,7 +89,10 @@ The attached file is the summary of the mid-term exam. If you have any questions
 
 Best,
 
-Xie ZHANG");
+Xie ZHANG"),
+("COMP3278_1A","""News！
+
+Aug. 25, 2022: Welcome to COMP3278A! The slides and videos of the lectures and tutorials will be released. The slides are ".pdf" files with one slide on one page (1-by-1 scheme). Please print multiple pages (slides) on one paper in order to play green. Thanks for saving papers! """);
 
 DROP TABLE IF EXISTS `Log`;
 
