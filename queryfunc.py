@@ -113,7 +113,7 @@ def updateLog():
 #----------get log-------
 
 def getLog():
-	cursor.execute("""SELECT log_id, login_time, logout_time, TIMEDIFF(logout_time,login_time) AS Duration FROM Log WHERE student_id = '%s' AND log_id != %s ORDER BY login_time DESC LIMIT 10;""" %(current_student_id, currentlog))
+	cursor.execute("""SELECT log_id, login_time, logout_time, TIMEDIFF(logout_time,login_time) AS Duration FROM Log WHERE student_id = '%s' ORDER BY login_time DESC;""" %(current_student_id))
 	results = cursor.fetchall()
 	return results
 
