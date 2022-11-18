@@ -2,50 +2,59 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets
 from ttbv2 import Ui_Form
 import sys
-from datetime import date, timedelta
+from datetime import date, timedelta, time
 
 query = []
 
 def get_ttb_info(aDate):
     global query
-    if (aDate == date.today() + timedelta(7)):
-        # sample
-        # print("next week")
-        query = [('COMP1323 - 1A', '08:30', '09:30', 'MWT2', 0, 'Monday'), 
-        ('COMP8394 - 1A', '14:30', '17:30', 'MWT4', 0, 'Monday')]
-    elif (aDate == date.today() - timedelta(7)):
-        # sample with only a few classes
-        # print("last week")
-        query = [('COMP1323 - 1A', '08:30', '09:30', 'MWT2', 0, 'Monday'), 
-        ('COMP8394 - 1A', '14:30', '17:30', 'MWT4', 0, 'Monday'),
-        ('COMP9409 - 1A', '12:30', '13:30', 'MWT3', 1, 'Tuesday'),
-        ('COMP2102 - 1A', '11:30', '14:30', 'MWT5', 1, 'Thursday')]
-    elif (aDate == date.today()):
-        # sample with many classes
-        query = [('COMP1323 - 1A', '08:30', '09:30', 'MWT2', 0, 'Monday'), 
-        ('COMP9409 - 1A', '12:30', '14:30', 'MWT3', 1, 'Wednesday'), 
-        ('COMP8394 - 1A', '14:30', '15:30', 'MWT4', 0, 'Thursday'), 
-        ('COMP2102 - 1A', '11:30', '14:30', 'MWT5', 1, 'Thursday'), 
-        ('COMP1323 - 1A', '08:30', '09:30', 'MWT2', 0, 'Friday'), 
-        ('COMP9409 - 1A', '13:30', '14:30', 'MWT3', 1, 'Monday'), 
-        ('COMP8394 - 1A', '14:30', '15:30', 'MWT4', 0, 'Wednesday'), 
-        ('COMP2102 - 1A', '11:30', '14:30', 'MWT5', 1, 'Wednesday'), 
-        ('COMP1323 - 1A', '08:30', '09:30', 'MWT2', 0, 'Thursday'), 
-        ('COMP9409 - 1A', '12:30', '14:30', 'MWT3', 1, 'Friday'), 
-        ('COMP8394 - 1A', '14:30', '15:30', 'MWT4', 0, 'Monday'),
-        ('COMP8394 - 1A', '09:30', '10:30', 'MWT4', 1, 'Monday'),
-        ('COMP8394 - 1A', '10:30', '11:30', 'MWT4', 0, 'Monday'),
-        ('COMP8394 - 1A', '11:30', '12:30', 'MWT4', 1, 'Monday'),
-        ('COMP8394 - 1A', '12:30', '13:30', 'MWT4', 0, 'Monday'),
-        ('COMP8394 - 1A', '15:30', '16:30', 'MWT4', 0, 'Monday'),
-        ('COMP8394 - 1A', '16:30', '17:30', 'MWT4', 0, 'Monday'),
-        ('COMP8394 - 1A', '17:30', '18:30', 'MWT4', 0, 'Monday'),
-        ('COMP9409 - 1A', '12:30', '16:30', 'MWT3', 0, 'Sunday'),
-        ('COMP9409 - 1A', '12:30', '13:30', 'MWT3', 1, 'Tuesday'),
-        ('COMP9409 - 1A', '13:30', '14:30', 'MWT3', 1, 'Saturday')
-        ]
-    else:
-        query = []
+    entry = []
+    entry.append('COMP1323 - 1A')
+    entry.append(time('08:30'))
+    entry.append(time('09:30'))
+    entry.append('MWT2')
+    entry.append(5)
+    entry.append(1)
+    query.append(tuple(entry))
+#     query = [('COMP1323 - 1A', time('08:30'), time('09:30'), 'MWT2', 0, 'Monday')]
+#     if (aDate == date.today() + timedelta(7)):
+#         # sample
+#         # print("next week")
+#         query = [('COMP1323 - 1A', '08:30', '09:30', 'MWT2', 0, 'Monday'), 
+#         ('COMP8394 - 1A', '14:30', '17:30', 'MWT4', 0, 'Monday')]
+#     elif (aDate == date.today() - timedelta(7)):
+#         # sample with only a few classes
+#         # print("last week")
+#         query = [('COMP1323 - 1A', '08:30', '09:30', 'MWT2', 0, 'Monday'), 
+#         ('COMP8394 - 1A', '14:30', '17:30', 'MWT4', 0, 'Monday'),
+#         ('COMP9409 - 1A', '12:30', '13:30', 'MWT3', 1, 'Tuesday'),
+#         ('COMP2102 - 1A', '11:30', '14:30', 'MWT5', 1, 'Thursday')]
+#     elif (aDate == date.today()):
+#         # sample with many classes
+#         query = [('COMP1323 - 1A', '08:30', '09:30', 'MWT2', 0, 'Monday'), 
+#         ('COMP9409 - 1A', '12:30', '14:30', 'MWT3', 1, 'Wednesday'), 
+#         ('COMP8394 - 1A', '14:30', '15:30', 'MWT4', 0, 'Thursday'), 
+#         ('COMP2102 - 1A', '11:30', '14:30', 'MWT5', 1, 'Thursday'), 
+#         ('COMP1323 - 1A', '08:30', '09:30', 'MWT2', 0, 'Friday'), 
+#         ('COMP9409 - 1A', '13:30', '14:30', 'MWT3', 1, 'Monday'), 
+#         ('COMP8394 - 1A', '14:30', '15:30', 'MWT4', 0, 'Wednesday'), 
+#         ('COMP2102 - 1A', '11:30', '14:30', 'MWT5', 1, 'Wednesday'), 
+#         ('COMP1323 - 1A', '08:30', '09:30', 'MWT2', 0, 'Thursday'), 
+#         ('COMP9409 - 1A', '12:30', '14:30', 'MWT3', 1, 'Friday'), 
+#         ('COMP8394 - 1A', '14:30', '15:30', 'MWT4', 0, 'Monday'),
+#         ('COMP8394 - 1A', '09:30', '10:30', 'MWT4', 1, 'Monday'),
+#         ('COMP8394 - 1A', '10:30', '11:30', 'MWT4', 0, 'Monday'),
+#         ('COMP8394 - 1A', '11:30', '12:30', 'MWT4', 1, 'Monday'),
+#         ('COMP8394 - 1A', '12:30', '13:30', 'MWT4', 0, 'Monday'),
+#         ('COMP8394 - 1A', '15:30', '16:30', 'MWT4', 0, 'Monday'),
+#         ('COMP8394 - 1A', '16:30', '17:30', 'MWT4', 0, 'Monday'),
+#         ('COMP8394 - 1A', '17:30', '18:30', 'MWT4', 0, 'Monday'),
+#         ('COMP9409 - 1A', '12:30', '16:30', 'MWT3', 0, 'Sunday'),
+#         ('COMP9409 - 1A', '12:30', '13:30', 'MWT3', 1, 'Tuesday'),
+#         ('COMP9409 - 1A', '13:30', '14:30', 'MWT3', 1, 'Saturday')
+#         ]
+#     else:
+#         query = []
 
 
 class MainWindow (QMainWindow, Ui_Form):
@@ -70,39 +79,29 @@ class MainWindow (QMainWindow, Ui_Form):
             newClass.setFrameShadow(QtWidgets.QFrame.Raised)
             newClass.setEnabled(True)
 
-            label_name = item[0]+"/"+item[1]+"/"+item[5]
-            newClass.setObjectName(label_name)
-            newClass.setAccessibleName(label_name)
+#             label_name = item[0]+"/"+item[1]+"/"+item[5]
+#             newClass.setObjectName(label_name)
+#             newClass.setAccessibleName(label_name)
 
             coursecode = item[0]
-            class_time = item[1]+ " - " + item[2]
+            class_time = str(item[1])+ " - " + str(item[2])
             room = item[3]
             class_info = coursecode + "\n" + class_time + "\n" + room
             newClass.setText(QtCore.QCoreApplication.translate("Form", class_info))
 
-            if (item[4] == 1):
+            if (item[5] == 1):
                 color = "#728FCE"
             else:
                 color = "#64E986"
             newClass.setStyleSheet("background-color: "+color)
 
-            hour = int(item[2][0:2]) - int(item[1][0:2])
-            row_num = int(item[1][0:2]) - 8 + 1
+            hour = int(item[2]-item[1])
+            row_num = int(hour(item[1])) - 8 + 1
             col_num = 0
-            if (item[5] == "Sunday"):
+            if (item[4] == 6):
                 col_num = 1
-            elif (item[5] == "Monday"):
-                col_num = 2
-            elif (item[5] == "Tuesday"):
-                col_num = 3
-            elif (item[5] == "Wednesday"):
-                col_num = 4
-            elif (item[5] == "Thursday"):
-                col_num = 5
-            elif (item[5] == "Friday"):
-                col_num = 6
-            elif (item[5] == "Saturday"):
-                col_num = 7
+            else:
+                col_num = item[4] + 2
             self.gridLayout.addWidget(newClass, row_num, col_num, hour, 1)
 
     def clear_current(self):
@@ -127,23 +126,13 @@ class MainWindow (QMainWindow, Ui_Form):
     def toddle_tutorials(self):
         checked = self.checkBox.isChecked()
         for item in query:
-            if (item[4] == 0):
-                row_num = int(item[1][0:2]) - 8 + 1
+            if (item[5] == 0):
+                row_num = int(hour(item[1])) - 8 + 1
                 col_num = 0
-                if (item[5] == "Sunday"):
+                if (item[4] == 6):
                     col_num = 1
-                elif (item[5] == "Monday"):
-                    col_num = 2
-                elif (item[5] == "Tuesday"):
-                    col_num = 3
-                elif (item[5] == "Wednesday"):
-                    col_num = 4
-                elif (item[5] == "Thursday"):
-                    col_num = 5
-                elif (item[5] == "Friday"):
-                    col_num = 6
-                elif (item[5] == "Saturday"):
-                    col_num = 7
+                else:
+                    col_num = item[4] + 2
                 tutorial = self.gridLayout.itemAtPosition(row_num, col_num).widget()
                 if (checked):
                     tutorial.show()
@@ -153,23 +142,13 @@ class MainWindow (QMainWindow, Ui_Form):
     def toddle_lectures(self):
         checked = self.checkBox_2.isChecked()
         for item in query:
-            if (item[4] == 1):
-                row_num = int(item[1][0:2]) - 8 + 1
+            if (item[5] == 1):
+                row_num = int(hour(item[1])) - 8 + 1
                 col_num = 0
-                if (item[5] == "Sunday"):
+                if (item[4] == 6):
                     col_num = 1
-                elif (item[5] == "Monday"):
-                    col_num = 2
-                elif (item[5] == "Tuesday"):
-                    col_num = 3
-                elif (item[5] == "Wednesday"):
-                    col_num = 4
-                elif (item[5] == "Thursday"):
-                    col_num = 5
-                elif (item[5] == "Friday"):
-                    col_num = 6
-                elif (item[5] == "Saturday"):
-                    col_num = 7
+                else:
+                    col_num = item[4] + 2
                 lecture = self.gridLayout.itemAtPosition(row_num, col_num).widget()
                 if (checked):
                     lecture.show()
