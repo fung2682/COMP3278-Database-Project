@@ -6,6 +6,7 @@ from Winsetup import Ui_Window
 import sys
 from datetime import datetime, date, timedelta, time
 from queryfunc import getClasses, checkclass, addLog, updateLog, getLog, getStudentInfo, getLastLog
+from PopUpv4 import PopUp
 
 student_name = ''
 current_student_id = -1
@@ -230,7 +231,11 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     myWin = Window("JEFF")
-
+    
     myWin.show()
-
+    try: #error when no class within 1h
+        myWin2 = PopUp("JEFF")
+        myWin2.show()
+    except:
+        pass
     sys.exit(app.exec_())
