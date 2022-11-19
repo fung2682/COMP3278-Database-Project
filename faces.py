@@ -107,7 +107,7 @@ while True:
                     dialog = QtWidgets.QDialog()
                     ui = Ui_dialog()
                     ##ui.getIdName(data[0],data[1])
-                    ui.getIdName("0001",data[1])
+                    ui.getIdName("0001",data[1])#test
                     ui.setupUi(dialog)
                     dialog.show()
 
