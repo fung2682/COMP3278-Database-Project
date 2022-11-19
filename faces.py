@@ -9,7 +9,7 @@ import sys
 
 
 from Window import Window
-from PopUp import Ui_dialog
+from PopUpv2 import Ui_dialog
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from queryfunc import checkclass
