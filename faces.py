@@ -101,13 +101,13 @@ while True:
                 myWin = Window(data[1])
                 myWin.show()
 
-                ##if checkclass(data[0]) is not None:
-                if checkclass('0001') is not None:# for test
+                if checkclass(data[0]) is not None:
+                #if checkclass('0001') is not None:# for test
                     app1 = QtWidgets.QApplication(sys.argv)
                     dialog = QtWidgets.QDialog()
                     ui = Ui_dialog()
-                    ##ui.getIdName(data[0],data[1])
-                    ui.getIdName("0001",data[1])#test
+                    ui.getIdName(data[0],data[1])
+                    #ui.getIdName("0001",data[1])#test
                     ui.setupUi(dialog)
                     dialog.show()
 
