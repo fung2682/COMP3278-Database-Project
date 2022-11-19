@@ -9,6 +9,8 @@ import sys
 
 
 from Window import Window
+from PopUp import Ui_dialog
+from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
 
@@ -101,6 +103,11 @@ while True:
                 myWin = Window("JEFF")
 
                 myWin.show()
+                app1 = QtWidgets.QApplication(sys.argv)
+                dialog = QtWidgets.QDialog()
+                ui = Ui_dialog()
+                ui.setupUi(dialog)
+                dialog.show()
 
 
 
