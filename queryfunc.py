@@ -50,14 +50,14 @@ def getClasses(d, current_student_id):
 def checkclass(current_student_id):
     cursor.execute("""SELECT L.course_id, L.class_id, L.date, L.starttime, L.endtime, L.room, L.zoom_link FROM (SELECT course_id FROM Study WHERE student_id = '%s') AS courseids, Lecture L WHERE courseids.course_id = L.course_id
 	AND L.date = CURRENT_DATE
-	AND TIMEDIFF(CURRENT_TIME, L.starttime) >= '00:00'
-	AND TIMEDIFF(CURRENT_TIME, L.starttime) <= '59:59';"""%current_student_id)
+	AND TIMEDIFF(L.starttime, CURRENT_TIME) >= '00:00:00'
+	AND TIMEDIFF(L.starttime, CURRENT_TIME) <= '00:59:59';"""%current_student_id)
     ret = cursor.fetchall()
     if not ret:
         cursor.execute("""SELECT T.course_id, T.class_id, T.date, T.starttime, T.endtime, T.room, T.zoom_link FROM (SELECT course_id FROM Study WHERE student_id = '%s') AS courseids, Tutorial T WHERE courseids.course_id = T.course_id
 		AND T.date = CURRENT_DATE
-		AND TIMEDIFF(CURRENT_TIME, T.starttime) >= '00:00'
-		AND TIMEDIFF(CURRENT_TIME, T.starttime) <= '59:59';"""%current_student_id)
+		AND TIMEDIFF(T.starttime, CURRENT_TIME) >= '00:00:00'
+		AND TIMEDIFF(T.starttime, CURRENT_TIME) <= '00:59:59';"""%current_student_id)
         ret = cursor.fetchall()
         if not ret:
             return None
