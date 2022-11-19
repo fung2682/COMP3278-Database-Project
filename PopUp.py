@@ -7,11 +7,20 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from queryfunc import checkclass
+
+
 
 class Ui_dialog(object):
     def setupUi(self, dialog):
         dialog.setObjectName("dialog")
         dialog.resize(707, 490)
+        self.ClassesInformation=checkclass('0001')
+        self.zoom = self.ClassesInformation[0][6]
+        print(self.zoom)
+        self.note = self.ClassesInformation[0][8][0][0]
+        print(self.note)
+        # COMP3230_1A | 1        | 2022-11-21 | 10:30:00  | 12:30:00 | CYCP-2 | https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9 |
         self.Email_Exit_button = QtWidgets.QPushButton(dialog)
         self.Email_Exit_button.setGeometry(QtCore.QRect(190, 420, 141, 28))
         self.Email_Exit_button.setObjectName("Email_Exit_button")
@@ -90,23 +99,23 @@ class Ui_dialog(object):
         self.Course_info_label.setText(_translate("dialog", "Course info:"))
         self.Classroom_address_label.setText(_translate("dialog", "Classroom address:"))
         self.Teachers_message_label.setText(_translate("dialog", "Teacher\'s message:"))
-        self.Zoom_link_label.setText(_translate("dialog", "Zoom link:"))
+        self.Zoom_link_label.setText(_translate("dialog", "zoom"))
         self.Note_link_label.setText(_translate("dialog", "Notes:"))
-        self.Within_1hour_label.setText(_translate("dialog", "Student_name, you have a class within an hour!"))
-        self.Course_info.setText(_translate("dialog", "INFO"))
-        self.Teachers_message.setText(_translate("dialog", "MSG"))
-        self.Classroom_address.setText(_translate("dialog", "ADDRESS"))
+        self.Within_1hour_label.setText(_translate("dialog","Student_name, you have a class within an hour!"))
+        self.Course_info.setText(_translate("dialog", self.ClassesInformation[0][0]))
+        self.Teachers_message.setText(_translate("dialog", self.ClassesInformation[0][7][0][0]))
+        self.Classroom_address.setText(_translate("dialog", self.ClassesInformation[0][5]))
 
         self.Zoom_link_browser.setHtml(_translate("dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"https://google.com/\"><span style=\" text-decoration: underline; color:#0000ff;\">Google</span></a></p></body></html>"))
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href= "+self.zoom+"><span style=\" text-decoration: underline; color:#0000ff;\">Click here to open Zoom</span></a></p></body></html>"))
         self.Note_link_browser.setHtml(_translate("dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"https://github.com/\"><span style=\" text-decoration: underline; color:#0000ff;\">Github</span></a></p></body></html>"))
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href="+self.note+"><span style=\" text-decoration: underline; color:#0000ff;\">Click here to open note</span></a></p></body></html>"))
 
 
 
