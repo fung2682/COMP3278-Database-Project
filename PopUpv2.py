@@ -12,7 +12,7 @@ from queryfunc import checkclass
 
 
 class Ui_dialog(object):
-    def getIdName(id,name):
+    def getIdName(self,id,name):
         self.id = id
         self.name = name
         
