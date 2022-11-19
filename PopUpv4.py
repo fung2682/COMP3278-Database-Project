@@ -12,7 +12,6 @@ from sendemail import send_template
 db_connection = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="27066182", #just my root pw
     database="facerecognition"
 )
 
