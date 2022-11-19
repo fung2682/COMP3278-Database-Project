@@ -12,13 +12,13 @@ from Window import Window
 from PopUp import Ui_dialog
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
-
+from queryfunc import checkclass
 
 from datetime import date, timedelta
 import time
 
 # 1 Create database connection
-myconn = mysql.connector.connect(host="localhost", user="root", database="facerecognition")
+myconn = mysql.connector.connect(host="localhost", user="root",passwd="1111", database="facerecognition")
 date = datetime.utcnow()
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
@@ -75,7 +75,6 @@ while True:
             select = "SELECT student_id, name FROM Student WHERE name='%s'" % (name)
             name = cursor.execute(select)
             result = cursor.fetchall()
-            # print(result)
             data = "error"
 
             for x in result:
@@ -99,15 +98,18 @@ while True:
                 cap.release()
                 cv2.destroyAllWindows()
                 app = QApplication(sys.argv)
-
-                myWin = Window("JEFF")
+                myWin = Window(data[1])
                 myWin.show()
-                
-                #app1 = QtWidgets.QApplication(sys.argv)
-                #dialog = QtWidgets.QDialog()
-                #ui = Ui_dialog()
-                #ui.setupUi(dialog)
-                #dialog.show()
+                print(checkclass('0001'))
+                ##if checkclass(data[0]) is not None:
+                if checkclass('0001') is not None:  
+                    app1 = QtWidgets.QApplication(sys.argv)
+                    dialog = QtWidgets.QDialog()
+                    ui = Ui_dialog()
+                    ##ui.getIdName(data[0],data[1])
+                    ui.getIdName("0001",data[1])
+                    ui.setupUi(dialog)
+                    dialog.show()
 
 
 
