@@ -17,7 +17,7 @@ def set_student_info(student):
     useremail = info[1]
 
 def test_set_class_info(): #hardcoded for testing
-    global course_id, class_id, room, date, zoom_link, start_time, end_time, note_link, class_teacher, class_type
+    global course_id, class_id, room, date, zoom_link, start_time, end_time, note_link, class_teacher_tuple, class_type
     global news_list
     course_id = "COMP3278_1A"
     class_id = "2"
@@ -28,7 +28,7 @@ def test_set_class_info(): #hardcoded for testing
     zoom_link = "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"
     note_link = "https://moodle.hku.hk/mod/resource/view.php?id=2668112"
     news_list = ["msg1111111111111111111111111111111111111111111111111111111111111111111111", "msg2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222", "msg33333333333333333333333333333333333333333333333333333"]
-    class_teacher = {"cs1", "Ping Luo", "pluo@cs.hku.hk", "CB326"}
+    class_teacher_tuple = ("cs1", "Ping Luo", "pluo@cs.hku.hk", "CB326")
     class_type = "Tutorial"
 
 
@@ -58,8 +58,10 @@ def get_news():
     for i in range(len(news_list)):
         news = news + news_list[i] + "\n"
 
-#def get_class_teacher():
-#    global class_teacher
+def get_class_teacher():
+    global class_teacher_tuple
+    global class_teacher
+    class_teacher = class_teacher_tuple[1]
 
 
 
@@ -81,6 +83,7 @@ class PopUp (QWidget, Ui_PopUp):
         self.set_remind_msg()
         self.set_news()
         self.set_room()
+        self.set_class_teacher()
 
 
         self.exit_button.clicked.connect(self.close)
@@ -124,6 +127,10 @@ class PopUp (QWidget, Ui_PopUp):
 
     def set_room(self):
         self.room.setText(room)
+
+    def set_class_teacher(self):
+        get_class_teacher()
+        self.class_teacher.setText(class_teacher)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
