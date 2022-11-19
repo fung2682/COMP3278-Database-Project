@@ -17,7 +17,7 @@ def set_student_info(student):
     useremail = info[1]
 
 def test_set_class_info(): #hardcoded for testing
-    global course_id, class_id, room, date, zoom_link, start_time, end_time, note_link, class_teacher_tuple, class_type
+    global course_id, class_id, room, date, zoom_link, start_time, end_time, note_link_list, class_teacher_tuple, class_type
     global news_list
     course_id = "COMP3278_1A"
     class_id = "2"
@@ -26,7 +26,7 @@ def test_set_class_info(): #hardcoded for testing
     start_time = "14:30"
     end_time = "16:30"
     zoom_link = "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"
-    note_link = "https://moodle.hku.hk/mod/resource/view.php?id=2668112"
+    note_link_list = ["https://moodle.hku.hk/mod/resource/view.php?id=2668112", "https://moodle.hku.hk/mod/resource/view.php?id=2639596", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"]
     news_list = ["msg1111111111111111111111111111111111111111111111111111111111111111111111", "msg2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222", "msg33333333333333333333333333333333333333333333333333333"]
     class_teacher_tuple = ("cs1", "Ping Luo", "pluo@cs.hku.hk", "CB326")
     class_type = "Tutorial"
@@ -51,20 +51,19 @@ def get_start_to_end_time():
     start_to_end_time = start_time + " - " + end_time
 
 
-def get_news():
-    global news_list
-    global news
-    news = ''
-    for i in range(len(news_list)):
-        news = news + news_list[i] + "\n"
+#def get_news():
+#    global news_list
+#    global news
+#    news = ''
+#    for i in range(len(news_list)):
+#        news = news + news_list[i] + "\n"
 
-def get_class_teacher():
-    global class_teacher_tuple
-    global class_teacher
-    class_teacher = class_teacher_tuple[1]
-
-
-
+def get_note_link():
+    global note_link_list
+    global note_link
+    note_link = ''
+    for i in range(len(note_link_list)):
+        note_link = note_link + " " + "<a href= "+note_link_list[i]+">"+str(note_link_list[i])+"</a><br/>"
 
 
 
@@ -83,6 +82,7 @@ class PopUp (QWidget, Ui_PopUp):
         self.set_remind_msg()
         self.set_news()
         self.set_room()
+        self.set_note_link()
         self.set_class_teacher()
 
 
@@ -114,23 +114,27 @@ class PopUp (QWidget, Ui_PopUp):
         self.start_time.setText(start_to_end_time) #start time is now start to end time
 
     def set_zoom_link(self):
-        self.zoom_link.setText("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href= "+zoom_link+"><span style=\" text-decoration: underline; color:#0000ff;\">Click here to enter zoom</span></a></p></body></html>")
+        self.zoom_link.setText("<a href= "+zoom_link+">Click here to enter zoom</a>")
+
+#    def set_news(self):
+#        get_news()
+#        self.news.setText(news)
 
     def set_news(self):
-        get_news()
-        self.news.setText(news)
-        #self.Within_1hour_label.setFont(QFont('Georgia', 12))
+        #get_news()
+        for i in range (len(news_list)):
+            self.news.addItem(QListWidgetItem(news_list[i]))
 
     def set_room(self):
         self.room.setText(room)
 
+    def set_note_link(self):
+        get_note_link()
+        for i in range(len(note_link_list)):
+            self.note_link.setText(note_link)
+
     def set_class_teacher(self):
-        get_class_teacher()
-        self.class_teacher.setText(class_teacher)
+        self.class_teacher.setText(class_teacher_tuple[1] + "      Email: " + class_teacher_tuple[2] + "      Office: " + class_teacher_tuple[3])
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
