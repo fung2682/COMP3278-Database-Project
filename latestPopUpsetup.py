@@ -13,6 +13,7 @@ class Ui_PopUp(object):
     def setupUi(self, PopUp):
         PopUp.setObjectName("PopUp")
         PopUp.resize(760, 660)
+        PopUp.setStyleSheet("background-color: #F9F6EE; color: #254117")
         self.remind_msg = QtWidgets.QLabel(PopUp)
         self.remind_msg.setGeometry(QtCore.QRect(90, 60, 400, 32))
         self.remind_msg.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -44,7 +45,7 @@ class Ui_PopUp(object):
         self.news_label.setOpenExternalLinks(True)
         self.news_label.setObjectName("news_label")
         self.note_link_label = QtWidgets.QLabel(PopUp)
-        self.note_link_label.setGeometry(QtCore.QRect(90, 410, 71, 16))
+        self.note_link_label.setGeometry(QtCore.QRect(90, 420, 71, 16))
         self.note_link_label.setTextFormat(QtCore.Qt.AutoText)
         self.note_link_label.setObjectName("note_link_label")
         self.class_teacher_label = QtWidgets.QLabel(PopUp)
@@ -92,16 +93,22 @@ class Ui_PopUp(object):
 #        self.news.setWordWrap(True)  # test
 #        self.news.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 
-        self.news = QListWidget(PopUp)
-        self.news.setGeometry(90, 300, 630, 110)
+        self.news = QListWidget(self)
+        self.news.setGeometry(90, 300, 590, 110)
         self.news.setWordWrap(True)
         self.news.setObjectName("news")
 
+        self.scroll_bar = QScrollBar(self)
+        self.scroll_bar.setStyleSheet("background : #EAE9E5;")
+        self.news.setVerticalScrollBar(self.scroll_bar)
+
         self.note_link = QtWidgets.QLabel(PopUp)
-        self.note_link.setGeometry(QtCore.QRect(90, 430, 631, 61))
+        self.note_link.setGeometry(QtCore.QRect(90, 440, 590, 60))
         self.note_link.setTextFormat(QtCore.Qt.RichText)
         self.note_link.setOpenExternalLinks(True)
         self.note_link.setObjectName("note_link")
+
+
         self.class_teacher = QtWidgets.QLabel(PopUp)
         self.class_teacher.setGeometry(QtCore.QRect(180, 520, 321, 16))
         self.class_teacher.setTextFormat(QtCore.Qt.AutoText)
