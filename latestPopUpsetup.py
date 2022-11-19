@@ -110,7 +110,7 @@ class Ui_PopUp(object):
 
 
         self.class_teacher = QtWidgets.QLabel(PopUp)
-        self.class_teacher.setGeometry(QtCore.QRect(180, 520, 321, 16))
+        self.class_teacher.setGeometry(QtCore.QRect(180, 520, 590, 16))
         self.class_teacher.setTextFormat(QtCore.Qt.AutoText)
         self.class_teacher.setObjectName("class_teacher")
         self.class_teacher.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
