@@ -16,7 +16,7 @@ welcome_msg = []
 def set_student_info(student):
     global student_name, current_student_id, useremail
     student_name = student
-    student_name = "JEFF" ### TEMPORARY, TO BE REMOVED!
+    #student_name = "JEFF" ### TEMPORARY, TO BE REMOVED!
     info = getStudentInfo(student_name)[0]
     current_student_id = info[0]
     useremail = info[1]
