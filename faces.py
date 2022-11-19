@@ -101,13 +101,13 @@ while True:
                 app = QApplication(sys.argv)
 
                 myWin = Window("JEFF")
-
                 myWin.show()
-                app1 = QtWidgets.QApplication(sys.argv)
-                dialog = QtWidgets.QDialog()
-                ui = Ui_dialog()
-                ui.setupUi(dialog)
-                dialog.show()
+                
+                #app1 = QtWidgets.QApplication(sys.argv)
+                #dialog = QtWidgets.QDialog()
+                #ui = Ui_dialog()
+                #ui.setupUi(dialog)
+                #dialog.show()
 
 
 
