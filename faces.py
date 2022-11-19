@@ -8,7 +8,7 @@ from datetime import datetime
 import sys
 
 
-from main_ttb import MainWindow
+from Window import Window
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
 
@@ -16,7 +16,7 @@ from datetime import date, timedelta
 import time
 
 # 1 Create database connection
-myconn = mysql.connector.connect(host="localhost", user="root", passwd="123456", database="facerecognition")
+myconn = mysql.connector.connect(host="localhost", user="root", database="facerecognition")
 date = datetime.utcnow()
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
@@ -98,7 +98,7 @@ while True:
                 cv2.destroyAllWindows()
                 app = QApplication(sys.argv)
 
-                myWin = MainWindow()
+                myWin = Window("JEFF")
 
                 myWin.show()
 
