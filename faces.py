@@ -18,7 +18,7 @@ from datetime import date, timedelta
 import time
 
 # 1 Create database connection
-myconn = mysql.connector.connect(host="localhost", user="root",passwd="1111", database="facerecognition")
+myconn = mysql.connector.connect(host="localhost", user="root", database="facerecognition")
 date = datetime.utcnow()
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
@@ -100,9 +100,9 @@ while True:
                 app = QApplication(sys.argv)
                 myWin = Window(data[1])
                 myWin.show()
-                print(checkclass('0001'))
+
                 ##if checkclass(data[0]) is not None:
-                if checkclass('0001') is not None:  
+                if checkclass('0001') is not None:# for test
                     app1 = QtWidgets.QApplication(sys.argv)
                     dialog = QtWidgets.QDialog()
                     ui = Ui_dialog()
