@@ -7,6 +7,7 @@ import sys
 from datetime import datetime, date, timedelta, time
 from queryfunc import getClasses, checkclass, addLog, updateLog, getLog, getStudentInfo, getLastLog
 from PopUpv4 import PopUp
+from random import randrange
 
 student_name = ''
 current_student_id = -1
@@ -25,9 +26,14 @@ def set_student_info(student):
 def get_wel_msg(logintime):
     global welcome_msg
     last_login = getLastLog(current_student_id)
+    quotes = ["I am always ready to learn, although I do not always like being taught.  - Winston Churchill", 
+              "Live as if you were to die tomorrow. Learn as if you were to live forever. — Mahatma Gandhi",
+              "Wisdom is not a product of schooling but of the lifelong attempt to acquire it. — Albert Einstein",
+              "Tell me and I forget, teach me and I may remember, involve me and I learn. — Benjamin Franklin",
+              "The most useful piece of learning for the uses of life is to unlearn what is untrue. — Antisthenes"]
     welcome_msg = " Hello, " + str(student_name) + ". " + "The time now is " + str(logintime.strftime("%d/%m/%Y %H:%M:%S \n")) + " You last logged in at "
     welcome_msg += str(last_login[0][0].strftime("%d/%m/%Y %H:%M:%S"))
-    welcome_msg += "\n                                                                                      I am always ready to learn, although I do not always like being taught.  - Winston Churchill"
+    welcome_msg += "\n                                                                         " + quotes[randrange(5)]
 
 def get_ttb_info(aDate):
     global query
@@ -227,15 +233,15 @@ class Window (QWidget, Ui_Window):
 
 
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
+#if __name__ == "__main__":
+#    app = QApplication(sys.argv)
 
-    myWin = Window("JEFF")
+#   myWin = Window("JEFF")
     
-    myWin.show()
-    try: #error when no class within 1h
-        myWin2 = PopUp("JEFF")
-        myWin2.show()
-    except:
-        pass
-    sys.exit(app.exec_())
+#    myWin.show()
+#    try: #error when no class within 1h
+#        myWin2 = PopUp("JEFF")
+#        myWin2.show()
+#    except:
+#        pass
+#    sys.exit(app.exec_())
