@@ -179,6 +179,13 @@ class Ui_Window(object):
         self.pushButton_2.setGeometry(QtCore.QRect(90, 121, 161, 25))
         self.pushButton_2.setObjectName("pushButton_2")
         self.pushButton_2.setStyleSheet("background-color: #C5C2BA")
+ 
+        self.week = QtWidgets.QLabel(Form)
+        self.week.setGeometry(QtCore.QRect(450, 121, 240, 25))
+        self.week.setObjectName("week")
+        self.week.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.week.setFrameShape(QtWidgets.QFrame.Box)
+        self.week.setAlignment(QtCore.Qt.AlignCenter)
 
         self.toLog = QtWidgets.QPushButton(Form)
         self.toLog.setGeometry(QtCore.QRect(1100, 123, 100, 25))
