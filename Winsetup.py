@@ -13,7 +13,7 @@ from PyQt5.QtWidgets import *
 
 class Ui_Window(object):
     def setupUi(self, Form):
-        Form.setObjectName("Timetable")
+        Form.setObjectName("Form")
         Form.resize(1400, 800)
         Form.setStyleSheet("background-color: #F9F6EE; color: #254117")
 
@@ -246,7 +246,7 @@ class Ui_Window(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Timetable"))
     
         self.label_90.setText(_translate("Form", " 16:30-17:30 "))
         self.label_04.setText(_translate("Form", "  Wednesday  "))
