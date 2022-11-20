@@ -69,7 +69,14 @@ Course Assessment:
 1 group project (20%).
 1 group SQL challenge (10% bonus).
 Final examination (50%)."),
-("COMP3230_1A", "Principles of operating systems","Operating system structures, process and thread, CPU scheduling, process synchronization, deadlocks, memory management, file systems, I/O systems and device driver, mass-storage structure and disk scheduling, case studies.");
+("COMP3230_1A", "Principles of operating systems","Operating system structures, process and thread, CPU scheduling, process 
+ synchronization, deadlocks, memory management, file systems, I/O systems and device driver, mass-storage structure and disk scheduling, case studies."),
+("COMP3353_1A", "Bioinformatics", "The goal of the course is for students to be grounded in basic bioinformatics concepts, 
+ algorithms, tools, and databases. Students will be leaving the course with hands-on bioinformatics analysis experience and 
+ empowered to conduct independent bioinformatics analyses. We will study: 1) algorithms, especially those for sequence alignment 
+ and assembly, which comprise the foundation of the rapid development of bioinformatics and DNA sequencing; 2) the leading bioinformatics 
+ tools for comparing and analyzing genomes starting from raw sequencing data; 3) the functions and organization of a few essential bioinformatics 
+ databases and learn how they support various types of bioinformatics analysis.");
 
 
 DROP TABLE IF EXISTS `news_announcement`;
@@ -89,7 +96,8 @@ VALUES ("COMP3278_1A","Dear students, We will resume face-to-face teaching tomor
 The attached file is the summary of the mid-term exam. If you have any questions, please feel free to contact me.
 Best,
 Xie ZHANG", NOW()),
-("COMP3278_1A","Welcome to COMP3278A.", date('2022-8-25'));
+("COMP3278_1A","Welcome to COMP3278A.", date('2022-8-25')),
+("COMP3353_1A","Welcome to COMP3353A.", date('2022-8-24'));
 
 DROP TABLE IF EXISTS `Log`;
 
@@ -117,7 +125,7 @@ CREATE TABLE `Study` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO Study (student_id, course_id)
-VALUES ("0001", "COMP3230_1A"), ("0001", "COMP3278_1A");
+VALUES ("0001", "COMP3230_1A"), ("0001", "COMP3278_1A"), ("0001", "COMP3353_1A");
 
 DROP TABLE IF EXISTS `Lecture`;
 
@@ -135,10 +143,19 @@ CREATE TABLE `Lecture` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO Lecture (course_id, class_id, `date`, `starttime`, `endtime`, room, zoom_link)
-VALUES ("COMP3278_1A", "1",'2022-11-22', '13:30', '15:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
-("COMP3278_1A", "2", '2022-11-29', '13:30', '15:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
-("COMP3230_1A", "1", '2022-11-21', '10:30', '12:30', "CYCP-2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
-("COMP3230_1A", "2", '2022-11-24', '10:30', '12:30', "CYCP-2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9");
+VALUES ("COMP3278_1A", "L1",'2022-11-22', '13:30', '15:30', "MWT5", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3278_1A", "L2", '2022-11-25', '13:30', '15:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3278_1A", "L3", '2022-11-29', '13:30', '15:30', "MWT5", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3278_1A", "L4", '2022-12-02', '11:30', '12:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3230_1A", "L1", '2022-11-21', '10:30', '12:30', "CYCP-2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+("COMP3230_1A", "L2", '2022-11-24', '11:30', '12:30', "CYCP-3", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+("COMP3230_1A", "L1", '2022-11-28', '10:30', '12:30', "CYCP-2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+("COMP3230_1A", "L1", '2022-12-01', '11:30', '12:30', "CYCP-3", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+("COMP3353_1A", "L1", '2022-11-21', '12:30', '14:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3353_1A", "L2", '2022-11-25', '15:30', '16:30', "CYCA", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3353_1A", "L3", '2022-11-28', '12:30', '14:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3353_1A", "L4", '2022-12-02', '15:30', '16:30', "CYCA", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09");
+
 
 
 DROP TABLE IF EXISTS `Tutorial`;
@@ -157,7 +174,13 @@ CREATE TABLE `Tutorial` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO Tutorial (course_id, class_id, `date`, `starttime`, `endtime`, room, zoom_link)
-VALUES ("COMP3278_1A", "1", '2022-11-24', '14:30', '15:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09");
+VALUES ("COMP3278_1A", "T1", '2022-11-24', '14:30', '15:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3278_1A", "T2", '2022-12-01', '14:30', '15:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3278_1A", "T1", '2022-11-22', '11:30', '12:30', "MWT2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+("COMP3278_1A", "T2", '2022-11-29', '11:30', '12:30', "MWT2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+("COMP3353_1A", "T1", '2022-11-23', '13:30', '14:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3353_1A", "T2", '2022-11-23', '13:30', '14:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09");
+
 
 DROP TABLE IF EXISTS `Lecture_Note`;
 
@@ -172,10 +195,18 @@ CREATE TABLE `Lecture_Note` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO Lecture_Note (course_id, class_id, note_link)
-VALUES ("COMP3278_1A", "1", "https://moodle.hku.hk/mod/resource/view.php?id=2665229"),
-("COMP3278_1A", "2", "https://moodle.hku.hk/mod/resource/view.php?id=2694930"),
-("COMP3230_1A", "1", "https://moodle.hku.hk/mod/resource/view.php?id=2639596"),
-("COMP3230_1A", "2", "https://moodle.hku.hk/mod/resource/view.php?id=2639597");
+VALUES ("COMP3278_1A", "L1", "https://moodle.hku.hk/mod/resource/view.php?id=2665229"),
+("COMP3278_1A", "L2", "https://moodle.hku.hk/mod/resource/view.php?id=2694930"),
+("COMP3230_1A", "L1", "https://moodle.hku.hk/mod/resource/view.php?id=2639596"),
+("COMP3230_1A", "L2", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"),
+("COMP3278_1A", "L3", "https://moodle.hku.hk/mod/resource/view.php?id=2665229"),
+("COMP3278_1A", "L4", "https://moodle.hku.hk/mod/resource/view.php?id=2694930"),
+("COMP3230_1A", "L3", "https://moodle.hku.hk/mod/resource/view.php?id=2639596"),
+("COMP3230_1A", "L4", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"),
+("COMP3353_1A", "L1", "https://moodle.hku.hk/mod/resource/view.php?id=2639596"),
+("COMP3353_1A", "L2", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"),
+("COMP3353_1A", "L3", "https://moodle.hku.hk/mod/resource/view.php?id=2665229"),
+("COMP3353_1A", "L4", "https://moodle.hku.hk/mod/resource/view.php?id=2694930");
 
 DROP TABLE IF EXISTS `Tutorial_Note`;
 
@@ -190,7 +221,12 @@ CREATE TABLE `Tutorial_Note` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO Tutorial_Note (course_id, class_id, note_link)
-VALUES ("COMP3278_1A", "1", "https://moodle.hku.hk/mod/resource/view.php?id=2668112");
+VALUES ("COMP3278_1A", "T1", "https://moodle.hku.hk/mod/resource/view.php?id=2668112"),
+("COMP3278_1A", "T2", "https://moodle.hku.hk/mod/resource/view.php?id=2668112"),
+("COMP3353_1A", "T1", "https://moodle.hku.hk/mod/resource/view.php?id=2639596"),
+("COMP3353_1A", "T2", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"),
+("COMP3230_1A", "T1", "https://moodle.hku.hk/mod/resource/view.php?id=2639596"),
+("COMP3230_1A", "T2", "https://moodle.hku.hk/mod/resource/view.php?id=2639597");
 
 DROP TABLE IF EXISTS `Teacher`;
 
@@ -207,7 +243,8 @@ INSERT INTO Teacher (teacher_id, name, email, office)
 VALUES ("cs1", "Ping Luo", "pluo@cs.hku.hk", "CB326"),
 ("cs2","Yao Mu", "muyao@connect.hku.hk","CB123"),
 ("cs3","Yao Lai","laiyao@connect.hku.hk", "CB123"),
-("cs4","Yizhou Li", "liyizhuo@connect.hku.hk", "CB123");
+("cs4","Yizhou Li", "liyizhuo@connect.hku.hk", "CB123"),
+("cs5", "Luo Ruibang", "rbluo@cs.hku.hk","CYC422");
 
 
 DROP TABLE IF EXISTS `Lecturer`;
@@ -223,10 +260,18 @@ CREATE TABLE `Lecturer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO Lecturer (course_id, class_id, teacher_id)
-VALUES ("COMP3278_1A", "1", "cs1"),
-("COMP3278_1A", "2", "cs1"),
-("COMP3230_1A", "1", "cs1"),
-("COMP3230_1A", "2", "cs1");
+VALUES ("COMP3278_1A", "L1", "cs1"),
+("COMP3278_1A", "L2", "cs1"),
+("COMP3278_1A", "L3", "cs1"),
+("COMP3278_1A", "L4", "cs1"),
+("COMP3230_1A", "L1", "cs1"),
+("COMP3230_1A", "L2", "cs1"),
+("COMP3230_1A", "L3", "cs1"),
+("COMP3230_1A", "L4", "cs1"),
+("COMP3353_1A", "L1", "cs5"),
+("COMP3353_1A", "L2", "cs5"),
+("COMP3353_1A", "L3", "cs5"),
+("COMP3353_1A", "L4", "cs5");
 
 DROP TABLE IF EXISTS `Tutor`;
 
@@ -241,7 +286,12 @@ CREATE TABLE `Tutor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO Tutor (course_id, class_id, teacher_id)
-VALUES ("COMP3278_1A", "1", "cs2");
+VALUES ("COMP3278_1A", "T1", "cs2"),
+("COMP3278_1A", "T2", "cs2"),
+("COMP3230_1A", "T1", "cs3"),
+("COMP3230_1A", "T2", "cs3"),
+("COMP3353_1A", "T1", "cs4"),
+("COMP3353_1A", "T2", "cs4");
 
 
 -- # Create TABLE 'Course'
