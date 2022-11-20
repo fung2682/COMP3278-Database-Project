@@ -9,16 +9,16 @@ import sys
 
 
 from Window import Window
-from PopUpv2 import Ui_dialog
+#from PopUp import Ui_dialog
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from queryfunc import checkclass
+
 
 from datetime import date, timedelta
 import time
 
 # 1 Create database connection
-myconn = mysql.connector.connect(host="localhost", user="root", database="facerecognition")
+myconn = mysql.connector.connect(host="localhost", user="root", passwd="1111", database="facerecognition")
 date = datetime.utcnow()
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
@@ -57,7 +57,7 @@ while True:
         id_, conf = recognizer.predict(roi_gray)
 
         # If the face is recognized
-        if conf >= 50:
+        if conf >= 20:
             # print(id_)
             # print(labels[id_])
             font = cv2.QT_FONT_NORMAL
@@ -75,6 +75,7 @@ while True:
             select = "SELECT student_id, name FROM Student WHERE name='%s'" % (name)
             name = cursor.execute(select)
             result = cursor.fetchall()
+            # print(result)
             data = "error"
 
             for x in result:
@@ -95,22 +96,20 @@ while True:
                         timetable for the student.
 
                 """
-                cap.release()
+                cap.release()               
                 cv2.destroyAllWindows()
+
+
+
                 app = QApplication(sys.argv)
-                myWin = Window(data[1])
+                myWin = Window(data)
                 myWin.show()
 
-                if checkclass(data[0]) is not None:
-                #if checkclass('0001') is not None:# for test
-                    app1 = QtWidgets.QApplication(sys.argv)
-                    dialog = QtWidgets.QDialog()
-                    ui = Ui_dialog()
-                    ui.getIdName(data[0],data[1])
-                    #ui.getIdName("0001",data[1])#test
-                    ui.setupUi(dialog)
-                    dialog.show()
-
+                #app1 = QtWidgets.QApplication(sys.argv)
+                #dialog = QtWidgets.QDialog()
+                #ui = Ui_dialog()
+                #ui.setupUi(dialog)
+                #dialog.show()
 
 
 
