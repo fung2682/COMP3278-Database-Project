@@ -18,7 +18,7 @@ welcome_msg = []
 def set_student_info(student):
     global student_name, current_student_id, useremail
     student_name = student
-    #student_name = "JEFF" ### TEMPORARY, TO BE REMOVED!
+    # student_name = "JEFF" ### FOR TESTING
     info = getStudentInfo(student_name)[0]
     current_student_id = info[0]
     useremail = info[1]
@@ -159,15 +159,13 @@ class Window (QWidget, Ui_Window):
             newClass.setMargin(5)
             newClass.setFrameShadow(QtWidgets.QFrame.Raised)
 
-            # label_name = item[0]+"/"+item[1]+"/"+item[5]
-            # newClass.setObjectName(label_name)
-            # newClass.setAccessibleName(label_name)
-
             coursecode = item[0]
-            # print(type(item[1]), ';' ,type(item[2]))
             class_time = str(item[1].seconds//3600)+":"+str((item[1].seconds//60)%60)+ " - " + str(item[2].seconds//3600)+":"+str((item[2].seconds//60)%60)
-            room = item[3]
-            class_info = coursecode + "\n" + class_time + "\n" + room
+            if item[3] == None:
+               room = ''
+            else: 
+                room = '\n' + item[3]
+            class_info = coursecode + "\n" + class_time + room
             newClass.setText(QtCore.QCoreApplication.translate("Form", class_info))
 
             if (item[5] == 1):
