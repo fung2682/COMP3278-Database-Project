@@ -175,10 +175,10 @@ class PopUp (QWidget, Ui_PopUp):
             self.class_teacher.setText(class_teacher_tuple[1] + "      Email: " + class_teacher_tuple[2] + "      Office: " + class_teacher_tuple[3])
 
 if __name__ == "__main__":
-#    try:
-    app = QApplication(sys.argv)
-    myWin = PopUp("JEFF")
-    myWin.show()
-    sys.exit(app.exec_())
-#    except:
-#        pass
+    try:
+        app = QApplication(sys.argv)
+        myWin = PopUp("JEFF")
+        myWin.show()
+        sys.exit(app.exec_())
+    except:
+        pass
