@@ -57,7 +57,7 @@ while True:
         id_, conf = recognizer.predict(roi_gray)
 
         # If the face is recognized
-        if conf >= 60:
+        if conf >= 70:
             # print(id_)
             # print(labels[id_])
             font = cv2.QT_FONT_NORMAL
