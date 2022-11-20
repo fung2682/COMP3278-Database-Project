@@ -6,15 +6,15 @@ import datetime
 
 useremail = "comp3278grp19@gmail.com"
 
-
-#0: name; 1: course_id, 2: class_id, 3: date, 4: starttime, 5: endtime, 6: room, 7: zoom_link, 8: news_announcement(list), 9. note_link (list), 10: course_teacher (2D list), 11: class_teacher (tuple), 12: class type
+#0: course_id, 1: class_id, 2: date, 3: starttime, 4: endtime, 5: room, 6: zoom_link, 7: news_announcement(list), 8. note_link (list), 9: class typ
+#0: course_id, 1: class_id, 2: date, 3: starttime, 4: endtime, 5: room, 6: zoom_link, 7: news_announcement(list), 8. note_link (list), 9: course_teacher (2D list), 10: class_teacher (tuple), 11: class type
 #def send_template(course_id, class_id, date, starttime, endtime, room, zoom_link, news_announcement, note_link, course_teacher, class_teacher, classtype):
 def send_template(name, course_id, class_id, date, starttime, endtime, room, zoom_link, news_announcement, note_link, course_teacher, class_teacher, classtype):
     env = Environment(
         loader=FileSystemLoader(searchpath="./"),
         autoescape=select_autoescape(['html', 'xml'])
     )
-    
+    name = "JEFF"
     temp = env.get_template('email_template.html')
     template1 = temp.render(**locals())
     msg = MIMEMultipart('alternative')
@@ -33,3 +33,5 @@ def send_template(name, course_id, class_id, date, starttime, endtime, room, zoo
     mail.login('comp3278grp19@gmail.com', 'qznqczmkjfzzdzyw')
     mail.sendmail('comp3278grp19@gmail.com', useremail, msg.as_string())
     mail.quit()
+    
+        
