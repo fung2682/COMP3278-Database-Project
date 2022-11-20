@@ -47,15 +47,23 @@ def get_log():
         _logs.append([(8-len(str(logs[i][0])))*'0'+str(logs[i][0]), logs[i][1], logs[i][2], logs[i][3]])
     return _logs
 
+def get_week_to_show(date_to_show):
+    sunday_to_show = date_to_show - timedelta(days = date_to_show.weekday()-6)
+    saturday_to_show = date_to_show + timedelta(days = date_to_show.weekday())
+    week_to_show = "Week of " + sunday_to_show.strftime("%d/%m/%Y") + " - " + saturday_to_show.strftime("%d/%m/%Y")
+    return week_to_show
+
 class Window (QWidget, Ui_Window):
     logintime = datetime.now()
     date_to_show = date.today()
+    week_to_show = get_week_to_show(date_to_show)
     def __init__(self, student, parent=None):
         set_student_info(student)
         super(Window, self).__init__(parent)
         self.setupUi(self)
         self.tottb.hide()
         self.set_welcome_msg()
+        self.week.setText(QtCore.QCoreApplication.translate("Form", self.week_to_show))
         get_ttb_info(self.date_to_show)
         self.build_ttb()
         self.build_log()
@@ -95,6 +103,7 @@ class Window (QWidget, Ui_Window):
         self.pushButton_2.hide()
         self.checkBox_2.hide()
         self.toLog.hide()
+        self.week.hide()
 
         self.tottb.show()
         self.log_title.show()
@@ -114,6 +123,7 @@ class Window (QWidget, Ui_Window):
         self.pushButton_2.show()
         self.checkBox_2.show()
         self.toLog.show()
+        self.week.show()
 
         self.tottb.hide()
         self.log_title.hide()
@@ -181,6 +191,8 @@ class Window (QWidget, Ui_Window):
     def show_next_week(self):
         self.clear_current()
         self.date_to_show += timedelta(7)
+        self.week_to_show = get_week_to_show(self.date_to_show)
+        self.week.setText(QtCore.QCoreApplication.translate("Form", self.week_to_show))
         get_ttb_info(self.date_to_show)
         self.build_ttb()
         if (self.checkBox.isChecked() == False):
@@ -192,6 +204,8 @@ class Window (QWidget, Ui_Window):
     def show_previous_week(self):
         self.clear_current()
         self.date_to_show -= timedelta(7)
+        self.week_to_show = get_week_to_show(self.date_to_show)
+        self.week.setText(QtCore.QCoreApplication.translate("Form", self.week_to_show))
         get_ttb_info(self.date_to_show)
         self.build_ttb()
         if (self.checkBox.isChecked() == False):
