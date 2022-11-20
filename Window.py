@@ -53,7 +53,7 @@ def get_week_to_show(date_to_show):
         saturday_to_show = date_to_show + timedelta(days = date_to_show.weekday())
     else:
         sunday_to_show = date_to_show - timedelta(days = date_to_show.weekday()+1)
-        saturday_to_show = date_to_show + timedelta(days = date_to_show.weekday()+5)
+        saturday_to_show = date_to_show + timedelta(days = 5-date_to_show.weekday())
     week_to_show = "Week of " + sunday_to_show.strftime("%d/%m/%Y") + " - " + saturday_to_show.strftime("%d/%m/%Y")
     return week_to_show
 
