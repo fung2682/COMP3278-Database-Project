@@ -116,10 +116,11 @@ class PopUp (QWidget, Ui_PopUp):
         else:
                 class_teacher_resultdict = {'id':"N/A", 'name':"N/A", 'email':"N/A", 'office':"N/A"}
         course_teacher_dict = {}
-        course_teacher_result = [] 
+        course_teacher_result = []
         if course_teacher is not None:
             for i in range(len(course_teacher)):
                 temp3 = tuple(course_teacher[i])
+                print(temp3)
                 if (len(temp) == len(temp3)):
                     course_teacher_dict = {temp[i]: temp3[i] for i, _ in enumerate(temp3)}
                 else:
@@ -127,7 +128,7 @@ class PopUp (QWidget, Ui_PopUp):
                 course_teacher_result.append(course_teacher_dict)
         lnews_list = list(news_list)
         lnote_link_list = list(note_link_list)
-        send_template(student_name, course_id, class_id, date, start_time, end_time, room, zoom_link, lnews_list, lnote_link_list, course_teacher_result, class_teacher_resultdict, class_type)
+        send_template(student_name, course_id, class_id, date, start_time, end_time, room, zoom_link, lnews_list, lnote_link_list[0], course_teacher_result, class_teacher_resultdict, class_type)
         self.close()
 
     def set_remind_msg(self):
@@ -167,16 +168,16 @@ class PopUp (QWidget, Ui_PopUp):
     def set_class_teacher(self):
         if class_teacher_tuple is None:
             self.class_teacher.setText("N/A")
-        elif class_teacher_tuple == 4:
+        elif len(class_teacher_tuple) == 4:
             self.class_teacher.setText(class_teacher_tuple[1] + "      Email: " + class_teacher_tuple[2] + "      Office: " + class_teacher_tuple[3])
         else:
             self.class_teacher.setText("N/A")
 
 if __name__ == "__main__":
-#    try:
-    app = QApplication(sys.argv)
-    myWin = PopUp("JEFF")
-    myWin.show()
-    sys.exit(app.exec_())
-#    except:
-#        pass
+    try:
+        app = QApplication(sys.argv)
+        myWin = PopUp("JEFF")
+        myWin.show()
+        sys.exit(app.exec_())
+    except:
+        pass
