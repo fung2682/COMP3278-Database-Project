@@ -13,7 +13,7 @@ from PyQt5.QtWidgets import *
 
 class Ui_Window(object):
     def setupUi(self, Form):
-        Form.setObjectName("Form")
+        Form.setObjectName("Timetable")
         Form.resize(1400, 800)
         Form.setStyleSheet("background-color: #F9F6EE; color: #254117")
 
