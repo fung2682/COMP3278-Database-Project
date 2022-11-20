@@ -197,10 +197,8 @@ class Window (QWidget, Ui_Window):
         self.week.setText(QtCore.QCoreApplication.translate("Form", self.week_to_show))
         get_ttb_info(self.date_to_show)
         self.build_ttb()
-        if (self.checkBox.isChecked() == False):
-            self.toddle_tutorials()
-        if (self.checkBox_2.isChecked() == False):
-            self.toddle_lectures()
+        self.checkBox.setChecked(True)
+        self.checkBox_2.setChecked(True)
 
       
     def show_previous_week(self):
@@ -210,10 +208,8 @@ class Window (QWidget, Ui_Window):
         self.week.setText(QtCore.QCoreApplication.translate("Form", self.week_to_show))
         get_ttb_info(self.date_to_show)
         self.build_ttb()
-        if (self.checkBox.isChecked() == False):
-            self.toddle_tutorials()
-        if (self.checkBox_2.isChecked() == False):
-            self.toddle_lectures()
+        self.checkBox.setChecked(True)
+        self.checkBox_2.setChecked(True)
 
     def toddle_tutorials(self):
         checked = self.checkBox.isChecked()
