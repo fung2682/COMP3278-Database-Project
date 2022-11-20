@@ -2,10 +2,10 @@ import mysql.connector
 from datetime import datetime
 
 # get student id -> current_student_id
-current_student_id = ""
+current_student_id = "0001"
 logintime = datetime.now()
 currentlog = 1
-student_name = ""
+student_name = "JEFF"
 
 # -------------connect mysql-----------------
 
