@@ -54,7 +54,7 @@ def set_info(student):
     room = ClassesInformation[5]
     zoom_link = ClassesInformation[6]
     news_list = ClassesInformation[7][0]
-    note_link_list = ClassesInformation[8][0]
+    note_link_list = ClassesInformation[8]
     course_teacher = ClassesInformation[9]
     class_teacher_tuple = ClassesInformation[10]
     class_type = ClassesInformation[11]
@@ -93,7 +93,7 @@ def get_note_link():
     global note_link
     note_link = ''
     for i in range(len(note_link_list)):
-        note_link = note_link + " " + "<a href= "+note_link_list[i]+">"+ "Note" + str(i+1) +"</a>"
+        note_link = note_link + " " + "<a href= "+note_link_list[i][0]+">"+ "Note" + str(i+1) +"</a>"
 
 class PopUp (QWidget, Ui_PopUp):
     def __init__(self, student):
@@ -119,7 +119,8 @@ class PopUp (QWidget, Ui_PopUp):
 
 
     def email_and_exit_button_clicked(self):
-        # send email here
+        # send email here.
+        global class_teacher_tuple
         temp = ('id', 'name', 'email', 'office')
         temp2 = class_teacher_tuple
         temp3 = ()
@@ -130,8 +131,8 @@ class PopUp (QWidget, Ui_PopUp):
             temp3 = tuple(course_teacher[i])
             course_teacher_dict = {temp[i]: temp3[i] for i, _ in enumerate(temp3)}
             course_teacher_result.append(course_teacher_dict)
-
         send_template(student_name, course_id, class_id, date, start_time, end_time, room, zoom_link, news_list, note_link_list, course_teacher_result, class_teacher_resultdict, class_type)
+        self.close()
 
     def set_remind_msg(self):
         get_remind_msg()
@@ -174,10 +175,10 @@ class PopUp (QWidget, Ui_PopUp):
             self.class_teacher.setText(class_teacher_tuple[1] + "      Email: " + class_teacher_tuple[2] + "      Office: " + class_teacher_tuple[3])
 
 if __name__ == "__main__":
-    try:
-        app = QApplication(sys.argv)
-        myWin = PopUp("JEFF")
-        myWin.show()
-        sys.exit(app.exec_())
-    except:
-        pass
+#    try:
+    app = QApplication(sys.argv)
+    myWin = PopUp("JEFF")
+    myWin.show()
+    sys.exit(app.exec_())
+#    except:
+#        pass
