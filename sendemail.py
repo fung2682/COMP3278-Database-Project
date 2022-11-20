@@ -14,7 +14,7 @@ def send_template(name, course_id, class_id, date, starttime, endtime, room, zoo
         loader=FileSystemLoader(searchpath="./"),
         autoescape=select_autoescape(['html', 'xml'])
     )
-    name = "JEFF"
+   
     temp = env.get_template('email_template.html')
     template1 = temp.render(**locals())
     msg = MIMEMultipart('alternative')
