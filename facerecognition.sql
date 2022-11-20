@@ -59,9 +59,7 @@ VALUES ("COMP3278_1A", "Introduction to database management systems", "This cour
 Lectures and Tutorials:
 every Thursday: 1:30pm-3:20pm (Lecture)
 every Monday: 2:30pm-3:20pm (Tutorial)
-
 Venue:  MWT2 and Zoom (F2F and online section will be conducted in parallel for all lectures and tutorials)
-
 Office Hours	Dr. Ping Luo: Every Monday 10:00am-11:00am, CB-326 (By appointment)
 * Please send me an email in advance so that we can better organize the consultation schedule for you.
 Course Assessment:
@@ -143,16 +141,16 @@ CREATE TABLE `Lecture` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO Lecture (course_id, class_id, `date`, `starttime`, `endtime`, room, zoom_link)
-VALUES ("COMP3278_1A", "L1",'2022-11-22', '13:30', '15:30', "MWT5", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+VALUES ("COMP3278_1A", "L1",'2022-11-22', '11:30', '13:30', "MWT5", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
 ("COMP3278_1A", "L2", '2022-11-25', '13:30', '15:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
 ("COMP3278_1A", "L3", '2022-11-29', '13:30', '15:30', "MWT5", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
 ("COMP3278_1A", "L4", '2022-12-02', '11:30', '12:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
 ("COMP3230_1A", "L1", '2022-11-21', '10:30', '12:30', "CYCP-2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
 ("COMP3230_1A", "L2", '2022-11-24', '11:30', '12:30', "CYCP-3", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
-("COMP3230_1A", "L1", '2022-11-28', '10:30', '12:30', "CYCP-2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
-("COMP3230_1A", "L1", '2022-12-01', '11:30', '12:30', "CYCP-3", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+("COMP3230_1A", "L3", '2022-11-28', '10:30', '12:30', "CYCP-2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+("COMP3230_1A", "L4", '2022-12-01', '11:30', '12:30', "CYCP-3", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
 ("COMP3353_1A", "L1", '2022-11-21', '12:30', '14:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
-("COMP3353_1A", "L2", '2022-11-25', '15:30', '16:30', "CYCA", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3353_1A", "L2", '2022-11-25', '15:30', '17:30', "CYCA", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
 ("COMP3353_1A", "L3", '2022-11-28', '12:30', '14:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
 ("COMP3353_1A", "L4", '2022-12-02', '15:30', '16:30', "CYCA", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09");
 
@@ -176,10 +174,10 @@ CREATE TABLE `Tutorial` (
 INSERT INTO Tutorial (course_id, class_id, `date`, `starttime`, `endtime`, room, zoom_link)
 VALUES ("COMP3278_1A", "T1", '2022-11-24', '14:30', '15:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
 ("COMP3278_1A", "T2", '2022-12-01', '14:30', '15:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
-("COMP3278_1A", "T1", '2022-11-22', '11:30', '12:30', "MWT2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
-("COMP3278_1A", "T2", '2022-11-29', '11:30', '12:30', "MWT2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+("COMP3230_1A", "T1", '2022-11-22', '13:30', '14:30', "MWT2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+("COMP3230_1A", "T2", '2022-11-29', '11:30', '12:30', "MWT2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
 ("COMP3353_1A", "T1", '2022-11-23', '13:30', '14:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
-("COMP3353_1A", "T2", '2022-11-23', '13:30', '14:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09");
+("COMP3353_1A", "T2", '2022-11-30', '15:30', '16:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09");
 
 
 DROP TABLE IF EXISTS `Lecture_Note`;
