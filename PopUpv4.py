@@ -61,22 +61,6 @@ def set_info(student):
 
 
 
-def test_set_class_info(): #hardcoded for testing
-    global course_id, class_id, room, date, zoom_link, start_time, end_time, note_link_list, class_teacher_tuple, class_type
-    global news_list
-    course_id = "COMP3278_1A"
-    class_id = "2"
-    room = "MWT2"
-    date = "YYYY-M-D"
-    start_time = "14:30"
-    end_time = "16:30"
-    zoom_link = "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"
-    note_link_list = ["https://moodle.hku.hk/mod/resource/view.php?id=2668112", "https://moodle.hku.hk/mod/resource/view.php?id=2639596", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"]
-    news_list = ["msg111111  1111111111111 111111111 1111111111111111111 11111111111", "msg222222222", "msg33333333333333333333", "msg44444", "msg5555"]
-    class_teacher_tuple = ("cs1", "Ping Luo", "pluo@cs.hku.hk", "CB326")
-    class_type = "Tutorial"
-
-
 def get_remind_msg():
     global remind_msg
     if class_type == "Tutorial":
@@ -124,14 +108,26 @@ class PopUp (QWidget, Ui_PopUp):
         temp = ('id', 'name', 'email', 'office')
         temp2 = class_teacher_tuple
         temp3 = ()
-        class_teacher_resultdict = {temp[i]: temp2[i] for i, _ in enumerate(temp2)}
+        if temp2 is not None:
+            if (len(temp) == len(temp2)):
+                class_teacher_resultdict = {temp[i]: temp2[i] for i, _ in enumerate(temp2)}
+            else:
+                class_teacher_resultdict = {'id':"N/A", 'name':"N/A", 'email':"N/A", 'office':"N/A"}
+        else:
+                class_teacher_resultdict = {'id':"N/A", 'name':"N/A", 'email':"N/A", 'office':"N/A"}
         course_teacher_dict = {}
-        course_teacher_result = []  # list of dict?
-        for i in range(len(course_teacher)):
-            temp3 = tuple(course_teacher[i])
-            course_teacher_dict = {temp[i]: temp3[i] for i, _ in enumerate(temp3)}
-            course_teacher_result.append(course_teacher_dict)
-        send_template(student_name, course_id, class_id, date, start_time, end_time, room, zoom_link, news_list, note_link_list, course_teacher_result, class_teacher_resultdict, class_type)
+        course_teacher_result = [] 
+        if course_teacher is not None:
+            for i in range(len(course_teacher)):
+                temp3 = tuple(course_teacher[i])
+                if (len(temp) == len(temp3)):
+                    course_teacher_dict = {temp[i]: temp3[i] for i, _ in enumerate(temp3)}
+                else:
+                    course_teacher_dict = {temp[i]: "NA" for i, _ in enumerate(temp3)}
+                course_teacher_result.append(course_teacher_dict)
+        lnews_list = list(news_list)
+        lnote_link_list = list(note_link_list)
+        send_template(student_name, course_id, class_id, date, start_time, end_time, room, zoom_link, lnews_list, lnote_link_list, course_teacher_result, class_teacher_resultdict, class_type)
         self.close()
 
     def set_remind_msg(self):
@@ -169,16 +165,18 @@ class PopUp (QWidget, Ui_PopUp):
             self.note_link.setText(note_link)
 
     def set_class_teacher(self):
-        if class_teacher_tuple == None:
+        if class_teacher_tuple is None:
             self.class_teacher.setText("N/A")
-        else:
+        elif class_teacher_tuple == 4:
             self.class_teacher.setText(class_teacher_tuple[1] + "      Email: " + class_teacher_tuple[2] + "      Office: " + class_teacher_tuple[3])
+        else:
+            self.class_teacher.setText("N/A")
 
 if __name__ == "__main__":
-    try:
-        app = QApplication(sys.argv)
-        myWin = PopUp("JEFF")
-        myWin.show()
-        sys.exit(app.exec_())
-    except:
-        pass
+#    try:
+    app = QApplication(sys.argv)
+    myWin = PopUp("JEFF")
+    myWin.show()
+    sys.exit(app.exec_())
+#    except:
+#        pass
