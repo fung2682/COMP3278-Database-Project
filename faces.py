@@ -116,12 +116,11 @@ while True:
                 myWin = Window(data[1])
                 # have a class in one hour
                 if checkclass(data[0]) is not None:
-                    myWin.show()
                     app2 = QApplication(sys.argv)
                     myWin2 = PopUp(data[1])
-                    myWin2.show()                    
-                else:
-                    myWin.show()
+                    myWin2.show() 
+                
+                myWin.show()
 
                 sys.exit(app.exec_())
 
