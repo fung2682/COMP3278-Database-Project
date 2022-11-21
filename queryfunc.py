@@ -2,10 +2,9 @@ import mysql.connector
 from datetime import datetime
 
 # get student id -> current_student_id
-current_student_id = "0001"
 logintime = datetime.now()
 currentlog = 1
-student_name = "JEFF"
+
 
 # -------------connect mysql-----------------
 
@@ -115,9 +114,9 @@ def addLog(current_student_id, logintime):
 
 # -------update log-----------------
 # update logout_time when user log out AND EVERY SMALL TIME INTERVAL (use a while loop with sleep()) !!!!!!!!!!!!!!!
-def updateLog(current_student_id):
-    cursor.execute("UPDATE Log SET logout_time = %s WHERE log_id = %s;" % (datetime.now(), currentlog))
-    db_connection.commit()
+# def updateLog(current_student_id):
+#     cursor.execute("UPDATE Log SET logout_time = %s WHERE log_id = %s;" % (datetime.now(), currentlog))
+#     db_connection.commit()
 
 
 # ---------------------------------
@@ -142,6 +141,7 @@ def getLastLog(current_student_id):
 
 
 def getStudentInfo(current_student_id):
-    cursor.execute("SELECT student_id, email_address FROM Student WHERE name = '%s';" % student_name)
+    cursor.execute("SELECT student_id, email_address FROM Student WHERE student_id = '%s';" % current_student_id)
+    print('getStudentInfo query: ', "SELECT student_id, email_address FROM Student WHERE student_id = '%s';" % current_student_id)
     results = cursor.fetchall()
     return results

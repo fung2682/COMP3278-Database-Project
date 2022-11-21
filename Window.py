@@ -5,7 +5,7 @@ from PyQt5.QtCore import *
 from Winsetup import Ui_Window
 import sys
 from datetime import datetime, date, timedelta, time
-from queryfunc import getClasses, checkclass, addLog, updateLog, getLog, getStudentInfo, getLastLog
+from queryfunc import getClasses, checkclass, addLog, getLog, getStudentInfo, getLastLog
 from PopUpv4 import PopUp
 from random import randrange
 
@@ -18,21 +18,26 @@ welcome_msg = []
 def set_student_info(student):
     global student_name, current_student_id, useremail
     student_name = student
-    # student_name = "JEFF" ### FOR TESTING
-    info = getStudentInfo(student_name)[0]
-    current_student_id = info[0]
-    useremail = info[1]
+    info = getStudentInfo(student_name)
+    if info != []:
+        current_student_id = info[0][0]
+        useremail = info[0][1]
+
 
 def get_wel_msg(logintime):
     global welcome_msg
     last_login = getLastLog(current_student_id)
+    if last_login == []:
+        last_login = '--/--/----'
+    else:
+        last_login = str(last_login[0].strftime("%d/%m/%Y %H:%M:%S"))
     quotes = ["I am always ready to learn, although I do not always like being taught.  - Winston Churchill", 
               "Live as if you were to die tomorrow. Learn as if you were to live forever. — Mahatma Gandhi",
               "Wisdom is not a product of schooling but of the lifelong attempt to acquire it. — Albert Einstein",
               "Tell me and I forget, teach me and I may remember, involve me and I learn. — Benjamin Franklin",
               "The most useful piece of learning for the uses of life is to unlearn what is untrue. — Antisthenes"]
     welcome_msg = " Hello, " + str(student_name) + ". " + "The time now is " + str(logintime.strftime("%d/%m/%Y %H:%M:%S \n")) + " You last logged in at "
-    welcome_msg += str(last_login[0][0].strftime("%d/%m/%Y %H:%M:%S"))
+    welcome_msg += last_login
     welcome_msg += "\n                                                                         " + quotes[randrange(5)]
 
 def get_ttb_info(aDate):
@@ -79,6 +84,9 @@ class Window (QWidget, Ui_Window):
         self.list_widget.hide()
         self.scroll_bar.hide()
 
+        self.pop = PopUp(student_name)
+        self.call_popup()
+
         self.checkBox.stateChanged.connect(lambda: self.toddle_tutorials())
         self.checkBox_2.stateChanged.connect(lambda: self.toddle_lectures())
         self.pushButton.clicked.connect(lambda: self.show_next_week())
@@ -90,6 +98,7 @@ class Window (QWidget, Ui_Window):
     def closeEvent(self, evnt):
         super(Window, self).closeEvent(evnt)
         addLog(current_student_id, self.logintime)
+        self.pop.close()
         evnt.accept()
         
     def set_welcome_msg(self):
@@ -243,17 +252,15 @@ class Window (QWidget, Ui_Window):
                 else:
                     lecture.hide()
 
+    def call_popup(self):
+        if checkclass(current_student_id) is not None:
+            self.pop.show()
 
+# Uncomment for Test
+# if __name__ == "__main__":
+#     app = QApplication(sys.argv)
+#     myWin = Window("JEFF")
 
-#if __name__ == "__main__":
-#    app = QApplication(sys.argv)
+#     myWin.show()
 
-#   myWin = Window("JEFF")
-    
-#    myWin.show()
-#    try: #error when no class within 1h
-#        myWin2 = PopUp("JEFF")
-#        myWin2.show()
-#    except:
-#        pass
-#    sys.exit(app.exec_())
+#     sys.exit(app.exec_())

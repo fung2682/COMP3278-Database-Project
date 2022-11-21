@@ -12,7 +12,6 @@ from Window import Window
 from PopUpv4 import PopUp
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from queryfunc import checkclass
 
 from datetime import date, timedelta
 import time
@@ -72,13 +71,15 @@ while True:
 
             # Find the student's information in the database.
             ##select = "SELECT student_id, name, DAY(login_date), MONTH(login_date), YEAR(login_date) FROM Student WHERE name='%s'" % (name)
-            select = "SELECT student_id, name FROM Student WHERE name='%s'" % (name)
+            select = "SELECT name FROM Student WHERE name='%s'" % (name)
+            print('query:', select)
             name = cursor.execute(select)
             result = cursor.fetchall()
-            data = "error"
-
-            for x in result:
-                data = x
+            print('name:\n', result)
+            if result == []:
+                data = 'error'
+            else:
+                data = result[0][0]
 
             # If the student's information is not found in the database
             if data == "error":
@@ -100,45 +101,16 @@ while True:
                 cv2.destroyAllWindows()
 
 
-                # #you can uncomment these codes for test
+                # uncomment these codes for test
                 # app = QApplication(sys.argv)
                 # myWin = Window('JEFF')
-                # # have a class in one hour
-                # if checkclass('0001') is not None:
-                #     app2 = QApplication(sys.argv)
-                #     myWin2 = PopUp('JEFF')
-                #     myWin2.show()                    
-                # else:
-                #     myWin.show()
                 # sys.exit(app.exec_())
 
                 app = QApplication(sys.argv)
-                myWin = Window(data[1])
-                # have a class in one hour
-                if checkclass(data[0]) is not None:
-                    app2 = QApplication(sys.argv)
-                    myWin2 = PopUp(data[1])
-                    myWin2.show() 
-                
+                myWin = Window(data)
                 myWin.show()
-
                 sys.exit(app.exec_())
 
-
-
-
-
-
-
-                
-                # Update the data in database
-                ###update =  "UPDATE Student SET login_date=%s WHERE name=%s"
-                ###val = (date, current_name)
-                ###cursor.execute(update, val)
-                ###update = "UPDATE Student SET login_time=%s WHERE name=%s"
-                ###val = (current_time, current_name)
-                ###cursor.execute(update, val)
-                ###myconn.commit()
                
                 hello = ("Hello ", current_name, "You did attendance today")
                 print(hello)
