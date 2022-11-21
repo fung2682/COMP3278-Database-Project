@@ -30,7 +30,7 @@ def get_wel_msg(logintime):
     if last_login == []:
         last_login = '--/--/----'
     else:
-        last_login = str(last_login[0].strftime("%d/%m/%Y %H:%M:%S"))
+        last_login = str(last_login[0][0].strftime("%d/%m/%Y %H:%M:%S"))
     quotes = ["I am always ready to learn, although I do not always like being taught.  - Winston Churchill", 
               "Live as if you were to die tomorrow. Learn as if you were to live forever. — Mahatma Gandhi",
               "Wisdom is not a product of schooling but of the lifelong attempt to acquire it. — Albert Einstein",

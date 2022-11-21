@@ -72,10 +72,8 @@ while True:
             # Find the student's information in the database.
             ##select = "SELECT student_id, name, DAY(login_date), MONTH(login_date), YEAR(login_date) FROM Student WHERE name='%s'" % (name)
             select = "SELECT name FROM Student WHERE name='%s'" % (name)
-            print('query:', select)
             name = cursor.execute(select)
             result = cursor.fetchall()
-            print('name:\n', result)
             if result == []:
                 data = 'error'
             else:

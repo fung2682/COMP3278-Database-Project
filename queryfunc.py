@@ -100,12 +100,15 @@ def checkclass(current_student_id):
 
 # -------create log (right after login)-------------
 def addLog(current_student_id, logintime):
-    cursor.execute(
-        "SELECT log_id FROM Log WHERE Log.student_id = '%s' ORDER BY login_time DESC LIMIT 1;" % current_student_id)
+    cursor.execute("SELECT log_id FROM Log WHERE Log.student_id = '%s' ORDER BY log_id DESC LIMIT 1;" % current_student_id)
     results = cursor.fetchall()
-    currentlog = results[0][0] + 1
+    if results == []:
+        currentlog = 0
+    else:
+        currentlog = results[0][0] + 1
     cursor.execute(
         "INSERT INTO Log VALUES (%s,'%s','%s','%s');" % (currentlog, current_student_id, logintime, datetime.now()))
+    
     db_connection.commit()
 
 
@@ -125,7 +128,7 @@ def addLog(current_student_id, logintime):
 
 def getLog(current_student_id):
     cursor.execute(
-        """SELECT log_id, login_time, logout_time, TIMEDIFF(logout_time,login_time) AS Duration FROM Log WHERE student_id = '%s' ORDER BY login_time DESC;""" % (
+        """SELECT log_id, login_time, logout_time, TIMEDIFF(logout_time,login_time) AS Duration FROM Log WHERE student_id = '%s' ORDER BY log_id DESC;""" % (
             current_student_id))
     results = cursor.fetchall()
     return results
@@ -135,13 +138,12 @@ def getLog(current_student_id):
 
 def getLastLog(current_student_id):
     cursor.execute(
-        "SELECT login_time FROM Log WHERE Log.student_id = '%s' ORDER BY login_time DESC LIMIT 1;" % current_student_id)
+        "SELECT login_time FROM Log WHERE Log.student_id = '%s' ORDER BY log_id DESC LIMIT 1;" % current_student_id)
     results = cursor.fetchall()
     return results
 
 
-def getStudentInfo(current_student_id):
-    cursor.execute("SELECT student_id, email_address FROM Student WHERE student_id = '%s';" % current_student_id)
-    print('getStudentInfo query: ', "SELECT student_id, email_address FROM Student WHERE student_id = '%s';" % current_student_id)
+def getStudentInfo(student_name):
+    cursor.execute("SELECT student_id, email_address FROM Student WHERE name = '%s';" % student_name)
     results = cursor.fetchall()
     return results

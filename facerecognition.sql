@@ -105,11 +105,11 @@ CREATE TABLE `Log` (
   `student_id` varchar(10) NOT NULL,
   `login_time` datetime NOT NULL,
   `logout_time` datetime NOT NULL,
-  PRIMARY KEY(log_id),
+  PRIMARY KEY(log_id, student_id),
   FOREIGN KEY(student_id) REFERENCES Student(student_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO Log VALUES (0,"0001",DATE('2022-10-20'),DATE('2022-10-21'));
+-- INSERT INTO Log VALUES (0,"0001",DATE('2022-10-20'),DATE('2022-10-21'));
 
 DROP TABLE IF EXISTS `Study`;
 
