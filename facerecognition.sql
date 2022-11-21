@@ -109,6 +109,7 @@ CREATE TABLE `Log` (
   FOREIGN KEY(student_id) REFERENCES Student(student_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO Log VALUES (0,"0001",DATE('2022-10-20'),DATE('2022-10-21'));
 
 DROP TABLE IF EXISTS `Study`;
 
@@ -144,15 +145,29 @@ VALUES ("COMP3278_1A", "L1",'2022-11-22', '11:30', '13:30', "MWT5", "https://hku
 ("COMP3278_1A", "L2", '2022-11-25', '13:30', '15:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
 ("COMP3278_1A", "L3", '2022-11-29', '13:30', '15:30', "MWT5", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
 ("COMP3278_1A", "L4", '2022-12-02', '11:30', '12:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3278_1A", "L5", '2022-12-05', '09:30', '11:30', "MWT5", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3278_1A", "L6", '2022-12-08', '12:30', '14:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3278_1A", "L7", '2022-11-15', '09:30', '11:30', "MWT5", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3278_1A", "L8", '2022-11-17', '13:30', '15:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+
 ("COMP3230_1A", "L1", '2022-11-21', '10:30', '12:30', "CYCP-2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
 ("COMP3230_1A", "L2", '2022-11-24', '11:30', '12:30', "CYCP-3", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
 ("COMP3230_1A", "L3", '2022-11-28', '10:30', '12:30', "CYCP-2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
 ("COMP3230_1A", "L4", '2022-12-01', '11:30', '12:30', "CYCP-3", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+("COMP3230_1A", "L5", '2022-12-06', '10:30', '12:30', "CYCP-2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+("COMP3230_1A", "L6", '2022-12-08', '14:30', '16:30', "CYCP-3", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+("COMP3230_1A", "L7", '2022-11-14', '12:30', '14:30', "CYCP-2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+("COMP3230_1A", "L8", '2022-11-18', '09:30', '11:30', "CYCP-3", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+
+
 ("COMP3353_1A", "L1", '2022-11-21', '12:30', '14:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
 ("COMP3353_1A", "L2", '2022-11-25', '15:30', '17:30', "CYCA", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
 ("COMP3353_1A", "L3", '2022-11-28', '12:30', '14:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
-("COMP3353_1A", "L4", '2022-12-02', '15:30', '16:30', "CYCA", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09");
-
+("COMP3353_1A", "L4", '2022-12-02', '15:30', '16:30', "CYCA", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3353_1A", "L5", '2022-12-06', '14:30', '16:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3353_1A", "L6", '2022-12-09', '14:30', '16:30', "CYCA", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3353_1A", "L7", '2022-11-14', '10:30', '12:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3353_1A", "L8", '2022-11-17', '08:30', '10:30', "CYCA", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09");
 
 
 DROP TABLE IF EXISTS `Tutorial`;
@@ -173,10 +188,18 @@ CREATE TABLE `Tutorial` (
 INSERT INTO Tutorial (course_id, class_id, `date`, `starttime`, `endtime`, room, zoom_link)
 VALUES ("COMP3278_1A", "T1", '2022-11-24', '14:30', '15:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
 ("COMP3278_1A", "T2", '2022-12-01', '14:30', '15:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3278_1A", "T3", '2022-12-09', '10:30', '11:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3278_1A", "T4", '2022-11-17', '11:30', '12:30', "MWT2", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+
 ("COMP3230_1A", "T1", '2022-11-22', '13:30', '14:30', "MWT2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
 ("COMP3230_1A", "T2", '2022-11-29', '11:30', '12:30', "MWT2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+("COMP3230_1A", "T3", '2022-12-09', '09:30', '10:30', "MWT2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+("COMP3230_1A", "T4", '2022-11-18', '13:30', '14:30', "MWT2", "https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9"),
+
 ("COMP3353_1A", "T1", '2022-11-23', '13:30', '14:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
-("COMP3353_1A", "T2", '2022-11-30', '15:30', '16:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09");
+("COMP3353_1A", "T2", '2022-11-30', '15:30', '16:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3353_1A", "T3", '2022-12-05', '13:30', '14:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09"),
+("COMP3353_1A", "T4", '2022-11-15', '14:30', '15:30', "CYCC", "https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09");
 
 
 DROP TABLE IF EXISTS `Lecture_Note`;
@@ -194,16 +217,30 @@ CREATE TABLE `Lecture_Note` (
 INSERT INTO Lecture_Note (course_id, class_id, note_link)
 VALUES ("COMP3278_1A", "L1", "https://moodle.hku.hk/mod/resource/view.php?id=2665229"),
 ("COMP3278_1A", "L2", "https://moodle.hku.hk/mod/resource/view.php?id=2694930"),
-("COMP3230_1A", "L1", "https://moodle.hku.hk/mod/resource/view.php?id=2639596"),
-("COMP3230_1A", "L2", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"),
 ("COMP3278_1A", "L3", "https://moodle.hku.hk/mod/resource/view.php?id=2665229"),
 ("COMP3278_1A", "L4", "https://moodle.hku.hk/mod/resource/view.php?id=2694930"),
+("COMP3278_1A", "L5", "https://moodle.hku.hk/mod/resource/view.php?id=2665229"),
+("COMP3278_1A", "L6", "https://moodle.hku.hk/mod/resource/view.php?id=2694930"),
+("COMP3278_1A", "L7", "https://moodle.hku.hk/mod/resource/view.php?id=2665229"),
+("COMP3278_1A", "L8", "https://moodle.hku.hk/mod/resource/view.php?id=2694930"),
+
+("COMP3230_1A", "L1", "https://moodle.hku.hk/mod/resource/view.php?id=2639596"),
+("COMP3230_1A", "L2", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"),
 ("COMP3230_1A", "L3", "https://moodle.hku.hk/mod/resource/view.php?id=2639596"),
 ("COMP3230_1A", "L4", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"),
+("COMP3230_1A", "L5", "https://moodle.hku.hk/mod/resource/view.php?id=2639596"),
+("COMP3230_1A", "L6", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"),
+("COMP3230_1A", "L7", "https://moodle.hku.hk/mod/resource/view.php?id=2639596"),
+("COMP3230_1A", "L8", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"),
+
 ("COMP3353_1A", "L1", "https://moodle.hku.hk/mod/resource/view.php?id=2639596"),
 ("COMP3353_1A", "L2", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"),
 ("COMP3353_1A", "L3", "https://moodle.hku.hk/mod/resource/view.php?id=2665229"),
-("COMP3353_1A", "L4", "https://moodle.hku.hk/mod/resource/view.php?id=2694930");
+("COMP3353_1A", "L4", "https://moodle.hku.hk/mod/resource/view.php?id=2694930"),
+("COMP3353_1A", "L5", "https://moodle.hku.hk/mod/resource/view.php?id=2665229"),
+("COMP3353_1A", "L6", "https://moodle.hku.hk/mod/resource/view.php?id=2694930"),
+("COMP3353_1A", "L7", "https://moodle.hku.hk/mod/resource/view.php?id=2665229"),
+("COMP3353_1A", "L8", "https://moodle.hku.hk/mod/resource/view.php?id=2694930");
 
 DROP TABLE IF EXISTS `Tutorial_Note`;
 
@@ -220,10 +257,18 @@ CREATE TABLE `Tutorial_Note` (
 INSERT INTO Tutorial_Note (course_id, class_id, note_link)
 VALUES ("COMP3278_1A", "T1", "https://moodle.hku.hk/mod/resource/view.php?id=2668112"),
 ("COMP3278_1A", "T2", "https://moodle.hku.hk/mod/resource/view.php?id=2668112"),
+("COMP3278_1A", "T3", "https://moodle.hku.hk/mod/resource/view.php?id=2668112"),
+("COMP3278_1A", "T4", "https://moodle.hku.hk/mod/resource/view.php?id=2668112"),
+
 ("COMP3353_1A", "T1", "https://moodle.hku.hk/mod/resource/view.php?id=2639596"),
 ("COMP3353_1A", "T2", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"),
+("COMP3353_1A", "T3", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"),
+("COMP3353_1A", "T4", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"),
+
 ("COMP3230_1A", "T1", "https://moodle.hku.hk/mod/resource/view.php?id=2639596"),
-("COMP3230_1A", "T2", "https://moodle.hku.hk/mod/resource/view.php?id=2639597");
+("COMP3230_1A", "T2", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"),
+("COMP3230_1A", "T3", "https://moodle.hku.hk/mod/resource/view.php?id=2639597"),
+("COMP3230_1A", "T4", "https://moodle.hku.hk/mod/resource/view.php?id=2639597");
 
 DROP TABLE IF EXISTS `Teacher`;
 
@@ -261,14 +306,28 @@ VALUES ("COMP3278_1A", "L1", "cs1"),
 ("COMP3278_1A", "L2", "cs1"),
 ("COMP3278_1A", "L3", "cs1"),
 ("COMP3278_1A", "L4", "cs1"),
+("COMP3278_1A", "L5", "cs1"),
+("COMP3278_1A", "L6", "cs1"),
+("COMP3278_1A", "L7", "cs1"),
+("COMP3278_1A", "L8", "cs1"),
+
 ("COMP3230_1A", "L1", "cs1"),
 ("COMP3230_1A", "L2", "cs1"),
 ("COMP3230_1A", "L3", "cs1"),
 ("COMP3230_1A", "L4", "cs1"),
+("COMP3230_1A", "L5", "cs1"),
+("COMP3230_1A", "L6", "cs1"),
+("COMP3230_1A", "L7", "cs1"),
+("COMP3230_1A", "L8", "cs1"),
+
 ("COMP3353_1A", "L1", "cs5"),
 ("COMP3353_1A", "L2", "cs5"),
 ("COMP3353_1A", "L3", "cs5"),
-("COMP3353_1A", "L4", "cs5");
+("COMP3353_1A", "L4", "cs5"),
+("COMP3353_1A", "L5", "cs5"),
+("COMP3353_1A", "L6", "cs5"),
+("COMP3353_1A", "L7", "cs5"),
+("COMP3353_1A", "L8", "cs5");
 
 DROP TABLE IF EXISTS `Tutor`;
 
@@ -285,11 +344,18 @@ CREATE TABLE `Tutor` (
 INSERT INTO Tutor (course_id, class_id, teacher_id)
 VALUES ("COMP3278_1A", "T1", "cs2"),
 ("COMP3278_1A", "T2", "cs2"),
+("COMP3278_1A", "T3", "cs2"),
+("COMP3278_1A", "T4", "cs2"),
+
 ("COMP3230_1A", "T1", "cs3"),
 ("COMP3230_1A", "T2", "cs3"),
-("COMP3353_1A", "T1", "cs4"),
-("COMP3353_1A", "T2", "cs4");
+("COMP3230_1A", "T3", "cs3"),
+("COMP3230_1A", "T4", "cs3"),
 
+("COMP3353_1A", "T1", "cs4"),
+("COMP3353_1A", "T2", "cs4"),
+("COMP3353_1A", "T3", "cs4"),
+("COMP3353_1A", "T4", "cs4");
 
 -- # Create TABLE 'Course'
 -- # Create TABLE 'Classroom'
